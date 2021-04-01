@@ -4,4 +4,4 @@ for (let i = 1; i <= n;i++) {
     console.log(i);
 }
 }
-numbersFrom1To5(["5"]);
+numbersFrom1To5(["6"]);
