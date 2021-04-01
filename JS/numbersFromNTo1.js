@@ -5,4 +5,4 @@ let n = Number(input[1]);
         n--;
     }
 }
-numbersFrom1To5(["5" ,"10" ,"12"]);
+numbersFrom1To5(["5" ,"10"]);
