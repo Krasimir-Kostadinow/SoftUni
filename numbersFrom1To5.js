@@ -1,7 +1,8 @@
-function numbersFrom1To5() {
+function numbersFrom1To5(n) {
 
-    for (let i = 1; i <= 5;i++) {
-        console.log(i);
+    while (n >= 1) {
+        console.log(n);
+        n--;
     }
 }
-numbersFrom1To5();
+numbersFrom1To5(5);
