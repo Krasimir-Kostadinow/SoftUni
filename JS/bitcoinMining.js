@@ -13,11 +13,12 @@ function bitcoinMining(input) {
         }
         let priceGoldDay = (currentDay * 67.51).toFixed(2);
         cashDesk += Number(priceGoldDay);
+        let numBitcoin = Math.trunc(cashDesk / 11949.16);
         if (cashDesk >= 11949.16) {
-            cashDesk -= 11949.16;//error
-            bitcoin++;
+            cashDesk -= 11949.16 * numBitcoin;
+            bitcoin += numBitcoin;
         }
-        if (bitcoin === 1) {
+        if (bitcoin > 0 & day === 0) {
             flag = true;
             day = days;
         }
