@@ -11,8 +11,8 @@ function bitcoinMining(input) {
         if (days % 3 === 0) {
             currentDay *= 0.7;
         }
-        let priceGoldDay = (currentDay * 67.51).toFixed(2);
-        cashDesk += Number(priceGoldDay);
+        let priceGoldDay = (currentDay * 67.51);
+        cashDesk += priceGoldDay;
         let numBitcoin = Math.trunc(cashDesk / 11949.16);
         if (cashDesk >= 11949.16) {
             cashDesk -= 11949.16 * numBitcoin;
@@ -30,4 +30,4 @@ function bitcoinMining(input) {
     }
     console.log(`Left money: ${cashDesk.toFixed(2)} lv.`);
 }
-bitcoinMining([3124.15, 504.212, 2511.124]);
+bitcoinMining([100, 200, 300]);
