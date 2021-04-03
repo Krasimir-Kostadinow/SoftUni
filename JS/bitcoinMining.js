@@ -14,7 +14,7 @@ function bitcoinMining(input) {
         let priceGoldDay = (currentDay * 67.51).toFixed(2);
         cashDesk += Number(priceGoldDay);
         if (cashDesk >= 11949.16) {
-            cashDesk -= 11949.16;
+            cashDesk -= 11949.16;//error
             bitcoin++;
         }
         if (bitcoin === 1) {
