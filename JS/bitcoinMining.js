@@ -6,19 +6,20 @@ function bitcoinMining(input) {
     for (let i = 0; i < input.length; i++) {
         let currentDay = input[i];
         days++;
-        let priceGoldDay = currentDay * 67.51;
-        cashDesk += priceGoldDay;
-        console.log(currentDay);
-
+    if (days % 3 === 0) {
+        currentDay *= 0.7; 
+    }
+    let priceGoldDay = currentDay * 67.51;
+    cashDesk += priceGoldDay;
     }
     if (cashDesk >= 11949.16) {
 cashDesk -= 11949.16;
 bitcoin++;
     }
 console.log(`Bought bitcoins: ${bitcoin}`);
-if (days === 1) {
+if (bitcoin === 1) {
     console.log(`Day of the first purchased bitcoin: ${days}`);
 }
-
+console.log(`Left money: ${cashDesk.toFixed(2)} lv.`);
 }
 bitcoinMining([100, 200, 300]);
