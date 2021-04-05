@@ -7,11 +7,14 @@ function movieProfit(input) {
 
     let priceForDay = numTicket * priceTicket;
     let profitTotalDays = priceForDay * numDays;
+    let profitForChinema = (profitTotalDays * percentageForChinema) / 100;
+    let profitForMovie = profitTotalDays - profitForChinema;
 
-    console.log(profitTotalDays)
+    console.log(`The profit from the movie ${nameMovie} is ${profitForMovie.toFixed(2)} lv.`);
 }
-movieProfit(["The Programmer",
-    "20",
-    "500",
-    "7.50",
-    "7"]);
+movieProfit(["The Jungle",
+"22",
+"20500",
+"9.37",
+"30"])
+
