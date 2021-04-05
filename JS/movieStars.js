@@ -2,9 +2,8 @@ function movieStars(input) {
 
     let budget = Number(input[0]);
     let i = 1;
-    let currentRemuneration = 0;
-    let residue = 0;
-    let flag = false;
+    let flag = true;
+    let lastSalary = 0;
     while (input[i] !== 'ACTION') {
         let currentActor = input[i++];
         let valueActor = currentActor.length;
@@ -16,15 +15,14 @@ function movieStars(input) {
             currentRemuneration = Number(input[i]);
         }
         if (budget < currentRemuneration) {
-            residue = Math.abs(budget - currentRemuneration);
-            flag = true;
+            flag = false;
+            lastSalary = currentRemuneration;
             break;
         }
         budget -= currentRemuneration;
-
         i++;
     }
-
+let residue = Math.abs(lastSalary - budget);
     if (flag) {
         console.log(`We are left with ${residue.toFixed(2)} leva.`);
     } else {
@@ -32,14 +30,13 @@ function movieStars(input) {
     }
 
 }
-movieStars(["170000",
-"Ben Affleck",
-"40000.50",
-"Zahari Baharov",
-"80000",
-"Tom Hanks",
-"2000.99",
-"ACTION"])
+movieStars(["90000",
+"Christian Bale",
+"70000.50",
+"Leonard DiCaprio",
+"Kevin Spacey",
+"24000.99"])
+
 
 
 
