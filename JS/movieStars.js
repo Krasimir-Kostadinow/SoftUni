@@ -1,32 +1,33 @@
 function movieStars(input) {
 
-    let budjet = Number(input[0]);
+    let budget = Number(input[0]);
     let i = 1;
-    let flag = false;
+    let currentRemuneration = 0;
+
     while (input[i] !== 'ACTION') {
         let currentActor = input[i++];
         let valueActor = currentActor.length;
         let currentRemuneration = 0;
         if (valueActor > 15) {
-            currentRemuneration = budjet * 0.2;
+            currentRemuneration = budget * 0.2;
             i--;
         } else {
             currentRemuneration = Number(input[i]);
         }
-        if (budjet < currentRemuneration) {
-            flag = true;
+        if (budget < currentRemuneration) {
+
             break;
         }
-        budjet -= currentRemuneration;
+        budget -= currentRemuneration;
 
         i++;
     }
+    let residue = Math.abs(budget - currentRemuneration);
 
-
-    if (flag) {
-        console.log(`We are left with ${budjet.toFixed(2)} leva.`);
+    if (budget >= currentRemuneration) {
+        console.log(`We are left with ${residue.toFixed(2)} leva.`);
     } else {
-        console.log(`We need ${budjet.toFixed(2)} leva for our actors.`);
+        console.log(`We need ${residue.toFixed(2)} leva for our actors.`);
     }
 
 }
