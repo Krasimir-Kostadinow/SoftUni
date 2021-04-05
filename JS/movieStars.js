@@ -32,11 +32,14 @@ function movieStars(input) {
     }
 
 }
-movieStars(["90000",
-    "Christian Bale",
-    "70000.50",
-    "Leonard DiCaprio",
-    "Kevin Spacey",
-    "24000.99"]);
+movieStars(["170000",
+"Ben Affleck",
+"40000.50",
+"Zahari Baharov",
+"80000",
+"Tom Hanks",
+"2000.99",
+"ACTION"])
+
 
 
