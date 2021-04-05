@@ -8,12 +8,12 @@ function movieDay(input) {
     let residue = Math.abs(timeMovie - needTotalTime);
 
     if (timeMovie <= needTotalTime) {
-        console.log(`You managed to finish the movie on time! You have ${Math.trunc(residue)} minutes left!"`);
+        console.log(`You managed to finish the movie on time! You have ${Math.round(residue)} minutes left!`);
     } else {
-        console.log(`Time is up! To complete the movie you need ${Math.trunc(residue)} minutes`);
+        console.log(`Time is up! To complete the movie you need ${Math.round(residue)} minutes.`);
     }
 
 }
-movieDay(["60",
-    "15",
-    "3"]);
+movieDay(["89",
+    "9",
+    "2"]);
