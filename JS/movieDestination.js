@@ -31,9 +31,26 @@ function movieDestination(input) {
             }
             break;
     }
+    let totalPrice = numDays * price;
 
+    if (destination === 'Dubai') {
+        totalPrice *= 0.7;
+    } else if (destination === 'Sofia') {
+        totalPrice *= 1.25;
+    }
+    let residue = Math.abs(totalPrice - budget);
+
+    if (budget >= totalPrice) {
+        console.log(`The budget for the movie is enough! We have ${residue.toFixed(2)} leva left!`);
+    } else {
+        console.log(`The director needs ${residue.toFixed(2)} leva more!`);
+    }
+ 
 }
 movieDestination(["400000",
-    "Sofia",
-    "Winter",
-    "20"]);
+"Dubai",
+"Winter",
+"20"]);
+
+
+
