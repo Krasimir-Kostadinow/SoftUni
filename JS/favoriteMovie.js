@@ -5,9 +5,16 @@ function favorireMovie(input) {
     while (input[i] !== 'STOP') {
         let currentMovie = input[i];
         let pointCurrentMovie = 0;
-        for (let j = 0; j < currentMovie.length; j++) {
+        let lenghtName = currentMovie.length;
+        for (let j = 0; j < lenghtName; j++) {
             let n = currentMovie.charCodeAt(j);
-pointCurrentMovie += n;
+            if (n < 91 & n > 64) {
+                pointCurrentMovie += (n - lenghtName);
+            } else if (n > 96 & n < 123) {
+                pointCurrentMovie += (n - (2 * lenghtName));
+            } else {
+                pointCurrentMovie += n;
+            }
         }
 
         if (i > 7) {
