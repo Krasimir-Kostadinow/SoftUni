@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,800');
-
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0px;
@@ -35,8 +34,11 @@ nav li {
     padding-bottom: 23px;
 }
 
-nav a:hover {
+a:hover {
     cursor: pointer;
-    border-bottom-color: #70e9ff;
     color: #333;
+}
+
+nav li:hover {
+    border-bottom-color: #70e9ff;
 }
