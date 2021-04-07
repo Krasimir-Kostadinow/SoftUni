@@ -39,6 +39,6 @@ a:hover {
     color: #333;
 }
 
-nav li:hover {
-    border-bottom-color: #70e9ff;
+li:hover {
+    border-bottom: 2px solid #70e9ff;
 }
