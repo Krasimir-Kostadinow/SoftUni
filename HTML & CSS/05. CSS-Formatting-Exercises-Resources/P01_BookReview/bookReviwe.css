@@ -13,9 +13,11 @@ nav {
     background: #eff4f7;
     margin: 40px;
     position: relative;
-    z-Index: 5;
+    z-index: 5;
     height: 80px;
+ 
 }
+
 
 nav a {
     text-decoration: none;
@@ -41,4 +43,55 @@ a:hover {
 
 li:hover {
     border-bottom: 2px solid #70e9ff;
+}
+
+body .logo {
+    position: absolute;
+    z-index: 0;
+    top: 20px;
+    left: 550px;
+    background: #ea3d51;
+    width: 90px;
+    height: 90px;
+    padding: 20px
+}
+
+body .brand {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    color: #ffffff;
+    margin-top: 72px;
+}
+
+body .content {
+    background: #CBD0D9;
+    width: 80%;
+    margin: auto;
+    margin-top: 160px;
+}
+
+
+header .book-title {
+    position: relative;
+    z-index: 10;
+    color: #121f25;
+    font-size: 54px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+header .book-genre {
+    position: relative;
+    z-index: 3;
+    top: -80px;
+    left: 80px;
+    color: #6dffb8;
+    font-size: 120px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
 }
