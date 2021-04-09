@@ -25,11 +25,11 @@ nav a {
 nav ul {
     padding: 20px 20px 0 20px;
     float: right;
+    list-style: none;
 }
 
 nav li {
     display: inline-block;
-    list-style: none;
     margin-right: 20px;
     padding-bottom: 23px;
 }
