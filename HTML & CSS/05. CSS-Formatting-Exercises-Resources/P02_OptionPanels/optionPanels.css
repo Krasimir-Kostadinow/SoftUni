@@ -26,7 +26,8 @@ nav li {
     padding-bottom: 23px;
 }
 
-nav ul li:first-of-type a {
+body nav > ul li:first-child a {
+    text-transform: capitalize;
     color: #BF1363;
 }
 
@@ -63,14 +64,18 @@ main section img {
     height: 60%;
 }
 
-section p:first-of-type {
+section h5 {
     text-transform: uppercase;
+    margin: 11px 5px;
+    font-weight: lighter;
+}
+section p {
+    margin: 0px 5px;
 }
 
 section div {
     height: 39%;
     margin-top: 1px;
     background: #fff;
-    padding: 1px 20px;
-    font-size: 14px;
+    padding: 1px 13px;
 }
