@@ -24,17 +24,17 @@ nav li {
     display: inline-block;
     margin-right: 20px;
     padding-bottom: 23px;
-}
-
-body nav > ul li:first-child a {
-    text-transform: capitalize;
-    color: #BF1363;
+    text-transform: uppercase;
 }
 
 nav a {
     text-decoration: none;
-    text-transform: uppercase;
     color: #191923;
+}
+
+body nav>ul li:first-child a {
+    text-transform: capitalize;
+    color: #BF1363;
 }
 
 nav a:hover {
@@ -54,6 +54,7 @@ main section {
     margin: 5px 5px 5px 5px;
     vertical-align: top;
 }
+
 main section:hover {
     opacity: 0.8;
     cursor: pointer;
@@ -69,6 +70,7 @@ section h5 {
     margin: 11px 5px;
     font-weight: lighter;
 }
+
 section p {
     margin: 0px 5px;
 }
