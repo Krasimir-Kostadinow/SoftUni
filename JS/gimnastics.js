@@ -32,6 +32,7 @@ function gimnastics(input) {
             }
             break;
     }
+    
     let residueParcent = ((20 - point) / 20) * 100;
 
     console.log(`The team of ${cuntry} get ${point.toFixed(3)} on ${device}.`);
@@ -39,6 +40,8 @@ function gimnastics(input) {
 
 
 }
+
 gimnastics(["Italy", "hoop"]);
 
 
+     
