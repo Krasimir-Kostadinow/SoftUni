@@ -4,30 +4,29 @@ function highJump(input) {
     let startHeight = desiredHeight - 30;
     let numJump = 0;
     let flag = false;
-    let unsuccessfulTry = 0;
-
-    for (let i = 1; i <= input.length; i++) {
-        let currentJump = Number(input[i]);
-        numJump++;
-        if (currentJump > startHeight) {
-            startHeight += 5;
-            unsuccessfulTry = 0;
-        } else {
-            unsuccessfulTry++;
-        }
-        if (unsuccessfulTry >= 3) {
-            startHeight = currentJump;
+    
+    for (let j = 1; j <= 3; j++) {
+        if (flag) {
             break;
         }
-        if (currentJump >= desiredHeight) {
-            startHeight = desiredHeight;
-            flag = true;
-            break;
+        for (let i = 1 + numJump; i <= input.length; i++) {
+            let currentJump = Number(input[i]);
+            numJump++;
+            if (currentJump > startHeight) {
+                startHeight += 5;
+                j = 1;
+            } else {
+                break;
+            }
+            if (currentJump >= desiredHeight) {
+                startHeight = currentJump;
+                flag = true;
+                break;
+            }
         }
-
     }
     if (flag) {
-        console.log(`Tihomir succeeded, he jumped over ${startHeight}cm after ${numJump} jumps.`);
+        console.log(`Tihomir succeeded, he jumped over ${desiredHeight}cm after ${numJump} jumps.`);
     } else {
         console.log(`Tihomir failed at ${startHeight}cm after ${numJump} jumps.`);
     }
@@ -40,7 +39,9 @@ highJump(["250",
     "231",
     "235",
     "234",
-    "235"])
+    "235"]);
+
+
 
 
 
