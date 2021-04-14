@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: #1d211e;
+    font-size: 22px;
+}
+
+.main-nav {
+    display: inline-block;
+}
+
+ul li {
+    padding: 16px;
+}
+
+nav {
+    background: #e67c1f;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+}
+
+nav ul li:hover>ul {
+    display: inline-block;
+    background: #e67c1f;
+    list-style: none;
+}
+
+.second-drop-down {
+    margin-left: 24px;
+}
+
