@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
 }
+
 body {
     background: #1d211e;
     font-size: 22px;
@@ -26,8 +27,13 @@ a {
 }
 
 nav ul ul {
+    margin-top: 20px;
     display: none;
     position: absolute;
+    width: 130px;
+}
+nav ul ul li {
+    text-align: center;
 }
 
 nav ul li:hover>ul {
@@ -39,4 +45,7 @@ nav ul li:hover>ul {
 .second-drop-down {
     margin-left: 24px;
 }
-
+nav ul ul .color:hover {
+    background: #000;
+    cursor: pointer;
+}
