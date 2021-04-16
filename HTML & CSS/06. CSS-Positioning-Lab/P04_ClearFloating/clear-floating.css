@@ -10,7 +10,7 @@ body {
 header {
     background: #8B603D;
     border: 2px solid #000;
-    width: 1600px;
+    width: 810px;
     height: 160px;
     margin: auto;
 }
@@ -22,45 +22,48 @@ header h1 {
 }
 
 .clearfix {
-    width: 1600px;
-    height: 432px;
-
+    width: 810px;
+    height: 290px;
+    margin: auto;
 }
 
 .left {
-    width: 17%;
+    width: 22%;
     float: left;
 }
 
 .right {
-    width: 70%;
-    margin: auto;
-  
-
+    width: 79%;
+    margin-left: 167px;
+    padding-top: 20px;
+    font-size: 18px;
 }
 
 .right h2 {
-    font-size: 32px;
-    margin:50px 0px 20px 20px;
-
+    font-size: 27px;
+    margin: 0px 0px 20px 20px;
+    padding: 4px 0px;
 }
+
 .right p {
-    margin: 20px;
+    margin: 33px 0 47px 20px;
 }
 
 main div ul li {
-    width: 230px;
-    height: 80px;
+    width: 150px;
+    height: 50px;
     color: #fff;
     background: #33B5E5;
-    text-align: center;
+    padding-left: 10px;
+    padding-top: 15px;
     margin: 15px;
+    box-sizing: border-box;
 }
 
 footer {
     background: #8B603D;
     border: 2px solid #000;
-    width: 1600px;
+    width: 810px;
     height: 110px;
     margin: auto;
 }
