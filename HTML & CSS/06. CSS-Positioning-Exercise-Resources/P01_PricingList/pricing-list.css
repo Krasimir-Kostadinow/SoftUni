@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn&display=swap');
-
-
 main {
     width: 1000px;
     font-family: Tahoma, sans-serif;
@@ -15,6 +13,8 @@ article {
     display: inline-block;
     border: 1px solid gray;
     vertical-align: top;
+    position: relative;
+    margin: 11px;
 }
 
 h1, h2, p {
@@ -24,22 +24,28 @@ h1, h2, p {
 
 h1 {
     font-size: 40px;
-
 }
 
 h2 {
     font-size: 30px;
     text-transform: capitalize;
+    margin: 0;
+    padding: 20px 0;
 }
 
 p {
     font-size: 60px;
+    margin: 20px 0;
 }
+
 ul {
     padding: 0;
 }
+
 li {
     list-style: none;
+    margin: 20px 10px;
+    border-bottom: 1px solid gray;
 }
 
 button {
@@ -52,5 +58,24 @@ button {
     border: gray;
     text-transform: capitalize;
     font-weight: bold;
-    margin: auto;
+    position: absolute;
+    top: 425px;
+    left: 35px;
+}
+
+article:hover h2 {
+    background: #65D3E2;
+    cursor: pointer;
+}
+
+article:hover {
+    cursor: pointer;
+}
+
+article:hover button {
+    background: #65D3E2;
+}
+
+article:hover p {
+    color: #65D3E2;
 }
