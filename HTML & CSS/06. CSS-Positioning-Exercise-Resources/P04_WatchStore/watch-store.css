@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+body {
+    font-family: 'Lemon', cursive;
+    background: #603D75;
+}
+
+main {
+    width: 900px;
+    margin: auto;
+    border-radius: 30px;
+    background: #FFAE32;
+    margin-top: 60px;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    text-transform: capitalize;
+    padding-top: 20px;
+}
+
+article {
+    width: 220px;
+    display: inline-block;
+    background: #5f2056;
+    margin-left: 58px;
+    margin-bottom: 30px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    color: #FFAE32;
+    font-size: 15px;
+}
+
+img {
+    width: 180px;
+    height: 180px;
+    max-width: 100%;
+    display: block;
+    border: 5px solid #826B73;
+    border-radius: 50%;
+    margin: auto;
+    background: url('images/watch-1.jpg');
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    font-size: 15px;
+    list-style: none;
+    color: #fff;
+}
+
+button {
+    display: block;
+    font-size: 15px;
+    width: 180px;
+    height: 30px;
+    border-radius: 15px;
+    margin: auto;
+    color: #9c57FF;
+    font-family: 'Lemon', cursive;
+    font-style: italic;
+    border-color: #efefef;
+    margin-bottom: 20px;
+}
