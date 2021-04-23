@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:700|Open+Sans:400,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+body {
+    font-size: 14px;
+    font-family: "Open Sans", Arial, "Comfortaa", sans-serif;
+}
+
+.clearfix {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+aside, main {
+    float: left;
+}
+
+aside {
+    width: 15%;
+   
+}
+
+aside h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: lighter;
+}
+
+aside img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+}
+
+aside p {
+    text-align: center;
+    text-transform: uppercase;
+    color: #b1bfc6;
+}
+
+aside ul {
+    list-style: none;
+    margin-top: 40px;
+    padding-left: 10px;
+}
+
+aside ul li {
+    margin: 25px 0;
+}
+
+aside ul li a {
+    color: #b1bfc6;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+aside ul li:hover a {
+    color: #333;
+}
+
+main {
+    width: 85%;
+    background: #f3f5f7;
+}
+
+main header h1 {
+    float: left;
+    color: #384850;
+    font-weight: lighter;
+    margin-top: 10px;
+    font-size: 35px;
+}
+
+main header div {
+    float: right;
+}
+
+main header div button {
+    width: 180px;
+    height: 45px;
+    border-radius: 20px;
+    border: 3px solid #fff;
+    background: #ff7739;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 210px;
+}
+
+main section article img {
+    max-width: 100%;
+}
+main section article {
+    width: 20%;
+    float: left;
+   margin-right: 30px;
+    box-shadow: 8px 6px 17px -1px rgba(0,0,0,0.26);
+    background: #fff;
+}
+main section article .status {
+    position: relative;
+    top: 50px;
+    left: -20px;
+
+}
