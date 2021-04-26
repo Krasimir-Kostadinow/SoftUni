@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa:700|Open+Sans:400,700');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
 body {
     font-size: 14px;
     font-family: "Open Sans", Arial, "Comfortaa", sans-serif;
@@ -18,7 +17,6 @@ aside, main {
 
 aside {
     width: 15%;
-   
 }
 
 aside h1 {
@@ -71,15 +69,18 @@ main header h1 {
     float: left;
     color: #384850;
     font-weight: lighter;
-    margin-top: 10px;
+    margin-top: 50px;
     font-size: 35px;
 }
 
 main header div {
     float: right;
+    width: 20%;
+    
 }
 
 main header div button {
+    display: block;
     width: 180px;
     height: 45px;
     border-radius: 20px;
@@ -88,22 +89,51 @@ main header div button {
     color: #fff;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 210px;
+    margin: auto;
+    margin-top: 50px;
+    border: 2px solid #ff7739;
+}
+main header div button:hover {
+background: #fff;
+color: #ff7739;
+}
+main section h2 {
+    text-transform: capitalize;
+}
+main section h3 {
+text-transform: uppercase;
+font-weight: lighter;
+}
+main section article img {
+    width: 100%;
 }
 
-main section article img {
-    max-width: 100%;
-}
 main section article {
-    width: 20%;
+    width: 24%;
     float: left;
-   margin-right: 30px;
-    box-shadow: 8px 6px 17px -1px rgba(0,0,0,0.26);
+    margin-right: 30px;
+    box-shadow: 8px 6px 17px -1px rgba(0, 0, 0, 0.26);
     background: #fff;
 }
+
 main section article .status {
     position: relative;
     top: 50px;
     left: -20px;
+    display: block;
+    width: 90px;
+    height: 26px;
+    border-radius: 20px;
+    background: #68bc69;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 7px;
+}
+main section article .status-rented {
+    background:#b1bfc6
+}
+main section article .status-draft {
 
+    background: #91a5af;
 }
