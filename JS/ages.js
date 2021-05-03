@@ -15,7 +15,7 @@ function vacation(numPeople, type, day) {
                 price *= 0.85;
             }
             break;
-        case 'Bussnes':
+        case 'Business':
             if (day === 'Friday') {
                 price = 10.90;
             } else if (day === 'Saturday') {
@@ -24,7 +24,7 @@ function vacation(numPeople, type, day) {
                 price = 16;
             }
             if (numPeople >= 100) {
-                numPeople /= 10; 
+                numPeople -= 10; 
             }
             break;
         case 'Regular':
