@@ -25,7 +25,7 @@ function vacation(numPeople, type, day) {
             }
             if (numPeople >= 100) {
                 numPeople -= 10; 
-            }
+            }    
             break;
         case 'Regular':
             if (day === 'Friday') {
