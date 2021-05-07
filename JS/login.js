@@ -1,11 +1,9 @@
 function login(arr) {
     let userName = arr.shift();
-    let pass = '';
-    for (let i = userName.length - 1; i >= 0; i--) {
-        let currentLetter = userName[i];
-        pass += currentLetter;
-    }
     let counter = 0;
+
+    let pass = userName.split('').reverse().join('');
+
     for (let j = 0; j <= arr.length; j++) {
         let currentStr = arr[j];
         if (currentStr === pass) {
@@ -22,4 +20,4 @@ function login(arr) {
 
     }
 }
-login(['sunny','rainy','cloudy','sunny','not sunny']);
+login(['sunny', 'rainy', 'cloudy', 'sunny', 'not sunny']);
