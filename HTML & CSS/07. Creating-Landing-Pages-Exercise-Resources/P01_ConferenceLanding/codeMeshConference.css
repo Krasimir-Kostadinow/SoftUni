@@ -1,0 +1,127 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 14px 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+header {
+    background: #3c3f49;
+    color: #fff;
+    height: 752px;
+    position: relative;
+    z-index: 0;
+}
+
+.overlay {
+    opacity: 0.1;
+    background: url('img/header-bg.png') center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+header nav {
+    padding: 30px;
+}
+
+header nav a {
+    color: #fff;
+}
+
+header nav ul {
+    float: right;
+    text-transform: uppercase;
+    list-style: none;
+}
+
+header nav ul li {
+    float: left;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+header nav h1 {
+    font-size: 14px;
+    float: left;
+    text-transform: uppercase;
+}
+
+header nav ul li:hover a {
+    color: #fa692e;
+}
+
+header .intro {
+    width: 900px;
+    margin: 250px auto 150px;
+}
+
+header .intro p {
+    width: 690px;
+    float: left;
+    font-size: 45px;
+    margin-right: 145px;
+}
+
+header .intro i.fa-play-circle {
+    margin-top: 15px;
+}
+
+header .intro-articles {
+    width: 90%;
+    margin: 0 auto;
+    height: 200px;
+}
+
+header .intro-articles article {
+    float: left;
+    width: 25%;
+    height: 100%;
+    font-size: 17px;
+}
+
+header .intro-articles article:hover {
+    border-bottom: 12px solid #fa692e;
+}
+
+header .intro-articles i {
+    margin-bottom: 50px;
+    height: 50px;
+}
+
+header .intro-articles article p {
+    padding: 0 40px 60px 0;
+}
+
+main .intro-orange .wrap {
+    width: 950px;
+    margin: 0 auto;
+    padding: 50px 0;
+
+}
+
+main .intro-orange .wrap .box {
+    width: 33%;
+    float: left;
+    height: 450px;
+
+}
