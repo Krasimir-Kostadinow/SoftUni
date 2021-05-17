@@ -16,6 +16,7 @@ a {
 img {
     max-width: 100%;
 }
+
 .clearfix::after {
     content: '';
     clear: both;
@@ -112,16 +113,54 @@ header .intro-articles article p {
     padding: 0 40px 60px 0;
 }
 
+main .intro-orange {
+    position: relative;
+}
+
 main .intro-orange .wrap {
-    width: 950px;
+    width: 1450px;
     margin: 0 auto;
     padding: 50px 0;
-
 }
 
 main .intro-orange .wrap .box {
-    width: 33%;
+    width: 320px;
     float: left;
-    height: 450px;
+    height: 400px;
+    margin: 0 81px;
+}
 
+main .intro-orange .wrap .box-left {
+    text-align: right;
+}
+
+main .intro-orange .wrap .box-left h1 {
+    padding: 20px 46px;
+}
+
+main .intro-orange .wrap .box-left p {
+    padding: 0 46px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+main .intro-orange .wrap .box-center .text-bold {
+    font-weight: bold;
+}
+
+main .intro-orange .wrap .orange-box {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    height: 450px;
+    width: 470px;
+    background: #fa692e;
+    opacity: 0.8;
+}
+
+main .intro-orange hr {
+    height: 0.5px;
+    background: #3c3f49;
+    margin: 20px 0;
+    border: 0;
 }
