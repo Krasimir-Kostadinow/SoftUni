@@ -7,7 +7,6 @@
 
 body {
     font-family: 14px 'Roboto', sans-serif;
-    width: 100%;
 }
 
 a {
@@ -31,7 +30,7 @@ ul {
 header {
     background: #3c3f49;
     color: #fff;
-    height: 752px;
+   
     position: relative;
     z-index: 0;
 }
@@ -40,7 +39,7 @@ header {
     opacity: 0.1;
     background: url('img/header-bg.png') center center;
     background-size: cover;
-    width: 100%;
+    width: 752px;
     height: 100%;
     position: absolute;
     z-index: -1;
