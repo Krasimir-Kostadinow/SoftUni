@@ -306,12 +306,12 @@ main .events .wrap p {
     margin: 50px auto;
 }
 
-main .events .wrap div {
+main .events .wrap form {
     width: 320px;
     margin: 0px auto;
 }
 
-main .events .wrap div input {
+main .events .wrap form input {
     float: left;
     border: 0;
     background: #3c3f49;
@@ -320,11 +320,11 @@ main .events .wrap div input {
     border-bottom: 3px solid #fa692e;
 }
 
-main .events .wrap div input::placeholder {
+main .events .wrap form input::placeholder {
     color: #fff;
 }
 
-main .events .wrap div button {
+main .events .wrap form button {
     float: right;
     width: 100px;
     height: 26px;
@@ -337,7 +337,7 @@ main .events .wrap div button {
     font-size: 10px;
 }
 
-main .events .wrap div button:hover {
+main .events .wrap form button:hover {
     background: #333;
 }
 
