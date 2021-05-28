@@ -1,6 +1,5 @@
 function sumDigits(num) {
-    let strm     = num.toString();
-    
+    let str = num.toString();
     let sum = 0;
     for (let i = 0; i < str.length; i++) {
         let currentNum = Number(str[i]);
@@ -8,4 +7,4 @@ function sumDigits(num) {
     }
 console.log(sum);
 }
-sumDigits(0001001);
+sumDigits(12);
