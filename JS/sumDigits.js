@@ -7,4 +7,4 @@ function sumDigits(num) {
     }
 console.log(sum);
 }
-sumDigits(12);
+sumDigits(124);
