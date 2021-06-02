@@ -1,40 +1,37 @@
-function digitsWithWords(name) {
-    let num;
-    switch (name) {
+function digitsWithWords(digit) {
+  
+    switch (digit) {
         case 'zero':
-            num = 0;
+            console.log(0);
             break;
         case 'one':
-            num = 1;
+            console.log(1);
             break;
         case 'two':
-            num = 2;
+            console.log(2);
             break;
         case 'thre':
-            num = 3;
+            console.log(3);
             break;
         case 'four':
-            num = 4;
+            console.log(4);
             break;
         case 'five':
-            num = 5;
+            console.log(5);
             break;
         case 'six':
-            num = 6;
+            console.log(6);
             break;
         case 'seven':
-            num = 7;
+            console.log(7);
             break;
         case 'eight':
-            num = 8;
+            console.log(8);
             break;
         case 'nine':
-            num = 9;
-            break;
-        default:
-            num = 'not a digit'
+            console.log(9);
             break;
     }
-    console.log(num);
+ 
 }
-digitsWithWords('ten');
+digitsWithWords('one');
