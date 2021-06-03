@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen');
+body {
+    background: #927057;
+    color: #ffffff;
+    padding: 20px;
+}
+
+main {
+    width: 470px;
+    margin: 50px auto 0;
+    padding: 50px 60px 70px 60px;
+    background: #d5c395;
+    position: relative;
+}
+
+main:before {
+    position: Absolute;
+    top: -30px;
+    left: 259px;
+    background: url('images/triangle.png') no-repeat 0 0;
+    display: block;
+    height: 35px;
+    width: 68px;
+    content: "";
+}
+
+footer {
+    font-size: 1em;
+    color: #EFE1C4;
+    text-align: center;
+    padding-top: 20px;
+}
+
+div.image-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+img {
+    border: 5px solid #d5c395;
+    height: 123px;
+}
+
+input {
+    outline: None;
+    border: none;
+    background: #efe1c4;
+    padding: 10px 10px 10px 60px;
+    width: 85%;
+    font-size: 1.1em;
+    color: #927057;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: #927057;
+    padding: 10px;
+    width: 100%;
+    max-Width: 500px;
+    font-size: 1.5em;
+    color: #d5c395;
+    border-radius: 5px;
+}
+
+ div.form-field img {
+    position: Absolute;
+    left: 12px;
+    top: 11px;
+    width: 20px;
+    height: 20px;
+    border: none;
+}
+
+div.form-field {
+    position: relative;
+}
+
