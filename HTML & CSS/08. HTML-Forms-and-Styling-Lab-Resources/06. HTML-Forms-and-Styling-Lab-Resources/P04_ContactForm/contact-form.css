@@ -1,0 +1,28 @@
+body {
+    Font: Georgia, "Times New Roman", serif;
+    background: #F7F7F7;
+}
+
+form {
+    border: 2px solid #888;
+    width: 50%;
+    margin: auto;
+}
+
+label {
+    display: list-item;
+    list-style: none;
+    margin: 20px;
+}
+span {
+    vertical-align: top;
+}
+button {
+    width: 300px;
+    height: 50px;
+    color: #F7F7F7;
+    font-size: 20px;
+    background: #E27575;
+    border: none;
+    border-radius: 5px;
+}
