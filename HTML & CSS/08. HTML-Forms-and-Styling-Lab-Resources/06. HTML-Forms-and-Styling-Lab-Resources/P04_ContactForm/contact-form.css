@@ -1,22 +1,48 @@
+
 body {
     Font: Georgia, "Times New Roman", serif;
     background: #F7F7F7;
+    margin-top: 80px;
 }
 
 form {
     border: 2px solid #888;
-    width: 50%;
+    width: 650px;
+    height: 450px;
     margin: auto;
+    background: #F7F7F7;
+    position: relative;
 }
 
-label {
-    display: list-item;
-    list-style: none;
-    margin: 20px;
+label[for="your name"] {
+    position: absolute;
+    left: 68px;
+    top: 149px;
+}
+label[for="your email"] {
+    position: absolute;
+    top: 189px;
+    left: 67px;
+}
+label[for="msg"] {
+    position: absolute;
+    left: 85px;
+    top: 230px;
+}
+label[for="drop-down"] {
+    position: absolute;
+    left: 93px;
+    top: 330px;
+}
+input,textarea,select,button {
+    margin-left: 5px;
+
 }
 span {
     vertical-align: top;
+    font-size: 17px;
 }
+
 button {
     width: 300px;
     height: 50px;
@@ -25,4 +51,21 @@ button {
     background: #E27575;
     border: none;
     border-radius: 5px;
+    position: absolute;
+    top: 370px;
+    left: 146px;
+}
+
+hr {
+    margin: 0 5px;
+}
+
+h1, h4 {
+    padding-left: 50px;
+}
+h1 {
+    margin-bottom: 0;
+}
+h4  {
+    margin-top: 0;
 }
