@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>5. Arranging the Widths</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <main>
+        <form method="POST" action="#">
+            <fieldset>
+                <legend>Rent Audi Vehicles</legend>
+                <label>
+                    <div>Name</div>
+                    <input type="text" required='required' name="Your Name" autofocus='autofocus'
+                        placeholder="Enter your name" />
+                </label>
+                <label>
+                    <div>Select</div>
+                    <input list="model" name="cars model"/>
+
+                    <datalist id="model">
+
+                        <option value="Audi 80">Audi 80</option>
+
+                        <option>Audi 90</option>
+
+                        <option>Audi RS6</option>
+
+                        <option>Audi S8</option>
+                    </datalist>
+                </label>
+                <label><div>Select</div></label>
+                <label> <div>Message:</div>
+                    <textarea name="Message" cols="22" rows="9"></textarea>
+
+                </label>
+
+            </fieldset>
+
+        </form>
+    </main>
+</body>
