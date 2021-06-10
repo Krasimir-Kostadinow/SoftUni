@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Form</title>
+    <link rel="stylesheet" href="product-form.css">
+</head>
+
+<body>
+    <main>
+        <div class="left">
+            <img src="images/nike-shoe.png" alt="shue">
+        </div>
+        <section class="form">
+            <h1>Nike Roche Run</h1>
+            <h2>120$</h2>
+            <form method="POST" action="#">
+                <p>Choose Size</p>
+                <label>
+                    <select name="size">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                    </select>
+
+                </label>
+                <p>Name on card</p>
+                <label>
+                    <input type="text" name="card name" placeholder="Enter your name" />
+
+                </label>
+                <p>Card Number</p>
+                <label>
+                    <input type="text" name="card number" placeholder="Enter card number" />
+                </label>
+                <div><button>continue</button></div>
+            </form>
+        </section>
+    </main>
+
+</body>
