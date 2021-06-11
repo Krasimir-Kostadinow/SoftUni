@@ -1,0 +1,51 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+body {
+    font-family: Tahoma, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+header {
+    width: 90%;
+    margin: auto;
+}
+
+h1 {
+    font-size: 28px;
+    color: #32A2E4;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+}
+
+section {
+    border-bottom: 1px dashed grey;
+}
+.info {
+    width: 600px;
+}
+.search-form {
+    width: 400px;
+
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+input[name="search"] {
+    outline: none;
+    width: 126px;
+    padding: 0px 20px 0px 0px;
+    position: absolute;
+}
+
+i {
+    position: relative;
+    left: 131px;
+    top: 1px;
+}
