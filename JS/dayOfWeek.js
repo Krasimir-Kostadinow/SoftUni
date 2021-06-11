@@ -17,4 +17,4 @@ function dayOfWeek(day) {
     }
 console.log(isFlag ? result : 'Invalid day!');
     }
-    dayOfWeek(6);
+    dayOfWeek(5);
