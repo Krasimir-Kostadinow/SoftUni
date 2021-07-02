@@ -49,7 +49,7 @@ function magicMtrices(array) {
         if (j === 0) {
             first += jEl;
         } else if (j === 1) {
-            second += jEl;
+            second += jEl;  
         } else if (j === 2) {
             thre += jEl;
         }
