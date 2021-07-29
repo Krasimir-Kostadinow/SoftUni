@@ -1,12 +1,13 @@
 function addAndSubtract(a, b, c) {
 
-    function sum() {
-        let sum = a + b;
+    function sum(numOne ,numTwo) {
+        let sum = numOne + numTwo;
         return sum;
     }
+let sumOne = sum(a ,b);
 
     function subtract() {
-     let subtract = sum() - c;
+     let subtract = sumOne - c;
      return subtract;
 
     }
