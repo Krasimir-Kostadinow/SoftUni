@@ -5,13 +5,18 @@ function palindromeIntegers(array) {
         function palindrome(integer) {
             let result;
             let strNum = integer + '';
-            let firstNum = Number(strNum[0]);
-            let endNum = Number(strNum[strNum.length - 1]);
+            for (let j = 0; j < Math.floor((strNum.length) / 2); j++) {
 
-            if (firstNum === endNum) {
-                result = true;
-            } else {
-                result = false;
+                let firstNum = Number(strNum[j]);
+                let endNum = Number(strNum[strNum.length - (1 + j)]);
+
+                if (firstNum === endNum) {
+                    result = true;
+                } else {
+                    result = false;
+                    break;
+                }
+
             }
             return result;
         }
@@ -20,4 +25,4 @@ function palindromeIntegers(array) {
 
 
 }
-palindromeIntegers([32,2,232,1010]);
+palindromeIntegers([5327235, 235222, 1010]);
