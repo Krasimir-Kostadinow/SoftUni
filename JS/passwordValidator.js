@@ -1,19 +1,17 @@
 function passwordValidator(pass) {
-   
-    
-    
-   
+
 
     function validCharacters(letters) {
-      
+
         let validPassLength = false;
         let countSymbol = letters.length
         if (countSymbol < 6 || countSymbol > 10) {
             validPass = false;
             validPassLength = true;
+           
         }
         return validPassLength;
-  
+
     }
 
     function validNumDigits(text) {
@@ -28,8 +26,9 @@ function passwordValidator(pass) {
             }
         }
         if (counterDigits < 2) {
-            validPass = false;
+          
             validDigits = true;
+
         }
         return validDigits;
     }
@@ -55,29 +54,37 @@ function passwordValidator(pass) {
             }
         }
         if (isFlag) {
-            validPass = false;
+          
             validSymbol = true;
         }
         return validSymbol;
 
     }
-
-  
-  
     
-
-    if (validPass) {
-     
+    function validPass() {
+        let result = false;
+        if (validCharacters(pass) === false && validNumDigits(pass) === false && validLetterAndDigits(pass) === false) {
+            result = true;
+        }
+        return result;
     }
+
+
+
+    if (validPass()) {
+        console.log('Password is valid');
+    }
+
     if (validCharacters(pass)) {
         console.log('Password must be between 6 and 10 characters');
+    }
+  
+    if (validLetterAndDigits(pass)) {
+        console.log('Password must consist only of letters and digits');
     }
     if (validNumDigits(pass)) {
         console.log('Password must have at least 2 digits');
     }
-    if (validLetterAndDigits(pass)) {
-        console.log('Password must consist only of letters and digits');
-    } 
 
 }
-passwordValidator('logIn');
+passwordValidator('Pa$s$s');
