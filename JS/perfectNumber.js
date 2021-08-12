@@ -1,24 +1,19 @@
 function perfectNumber(num) {
-    let isFlag = true;
-    let result = 0;
-    let start = num;
-    while (result <= num) {
-        let digit = Math.ceil(start / 2);
-        if (digit % 2 === 0 || digit % 1 === 0) {
-            result += digit;
-            if (result === num) {
-                isFlag = false;
-                console.log('We have a perfect number!');
-                break;
-            }
-        }
-        start = digit;
+    let temp = 0;
 
+    for (let i = 1; i <= num / 2; i++) {
+
+        if (num % i === 0) {
+            temp += i;
+        }
     }
-    if (isFlag) {
-        console.log("It's not so perfect.");
-    }
+    
+if (temp === num && temp !== 0) {
+console.log('We have a perfect number!');
+} else {
+    console.log("It's not so perfect.");
+}
 
 
 }
-perfectNumber(28);
+perfectNumber(1236498);
