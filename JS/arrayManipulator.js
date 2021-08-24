@@ -1,13 +1,5 @@
 function arrayManipulator(array, commands) {
     let newArray = array.slice(0);
-
-    let i = 0;
-    while (commands[i] !== 'print') {
-        let command = commands[i].split(' ');
-
-        commandExecutor(command);
-        i++;
-    }
     function commandExecutor(input) {
 
         switch (input[0]) {
@@ -49,13 +41,17 @@ function arrayManipulator(array, commands) {
         }
 
     }
-     let result = [];
-     for (let i = 0; i < newArray.length; i++) {
-         const element = newArray[i];
-         result.push(element);
-     }
-     return result;
+    let i = 0;
+    while (commands[i] !== 'print') {
+        let command = commands[i].split(' ');
+
+        commandExecutor(command);
+        i++;
+    }
+ 
+   
+     return `[ ${newArray.join(', ')} ]` ;
 }
-console.   log(arrayManipulator([1, 2, 4, 5, 6, 7],
-    ['add 1 8', 'contains 1', 'contains 3', 'print']
-    ));   
+console.log(arrayManipulator([1, 2, 4, 5, 6, 7],
+    ['add 1 8', 'contains 1', 'contains -3', 'print']
+    ));
