@@ -4,7 +4,9 @@ function arrayManipulator(array, commands) {
 
         switch (input[0]) {
             case 'add':
-                newArray.splice(Number(input[1]), 0, Number(input[2]));
+                if (input[1] >= 0) {
+                    newArray.splice(Number(input[1]), 0, Number(input[2]));
+                }
                 break;
             case 'addMany':
                 let ix = Number(input[1]);
@@ -48,10 +50,10 @@ function arrayManipulator(array, commands) {
         commandExecutor(command);
         i++;
     }
- 
-   
-     return `[ ${newArray.join(', ')} ]` ;
+
+
+    return `[ ${newArray.join(', ')} ]`;
 }
 console.log(arrayManipulator([1, 2, 4, 5, 6, 7],
-    ['add 1 8', 'contains 1', 'contains -3', 'print']
-    ));
+    ['add 3 8', 'contains 1', 'contains -3', 'print']
+));
