@@ -39,8 +39,8 @@ function equalNeighbors(matrix) {
     return counter;
 
 }
-console.log(equalNeighbors([['test', 'yes', 'yo', 'ho'],
-['well', 'done', 'yo', '6'],
-['not', 'done', 'yet', '5']]
-
-));
+console.log(equalNeighbors([
+    ['2', '2', '5', '7', '4'],
+    ['4', '0', '5', '3', '4'],
+    ['2', '5', '5', '4', '2']
+]));
