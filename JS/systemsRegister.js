@@ -1,38 +1,44 @@
 function systemRegister(input) {
 
-	function surtArr(array) {
+	function sortArr(input, check) {
+		let array = input.slice(0);
 		let newArr = [];
-		let check = array[0][1];
-		let counter = 0;
+		while (array.length !== 0) {
 
+			let check = array[0][1];
+			let counter = 0;
 
-
-
-		for (let i = 0; i < array.length; i++) {
-			let current = array[i][1];
-			if (check = current) {
-				counter++;
-				array.splice(i, 1);
-				i--;
-			} 
-
-		
+			for (let i = 0; i < array.length; i++) {
+				let current = array[i][1];
+				if (check === current) {
+					counter++;
+					array.splice(i, 1);
+					i--;
+				}
+			}
+			newArr.push([check, counter]);
 		}
-	
 
-newArr.push([check, counter]);
+		let convert = input.map(el => {
+			let check = newArr.map(element => {
+				if (el[1] === element[0]) {
+					el[1] = element;
+				}
+			})
+			return el;
+		});
+
+		convert.sort((a, b) => b[1][1] - a[1][1]);
+
+		let output = convert.map(el => {
+			el[1] = el[1][0];
+			return el;
+		});
+
+		return output;
+
 	}
 
-
-
-
-	class Register {
-		constructor(systemName, componentName, subcomponentName) {
-			this.systemName = systemName;
-			this.componentName = componentName;
-			this.subcomonentName = subcomponentName;
-		}
-	}
 	let outputArr = [];
 
 	let inputArr = input.map(el => el.split(' | '));
@@ -52,10 +58,10 @@ newArr.push([check, counter]);
 		let currentSubcomponent = inputArr[i][2];
 
 		if (inputArr.length - 1 === i) {
+			systemName.push(inputArr[i]);
 			outputArr.push(systemName);
 			sysName = current;
 			systemName = [];
-			systemName.push(inputArr[i]);
 			break;
 		}
 
@@ -72,22 +78,22 @@ newArr.push([check, counter]);
 
 	}
 
+	
+	// outputArr.sort((a, b) => a[0][0].localeCompare(b[0][0]));
 	outputArr.sort((a, b) => b.length - a.length);
+	let sortArray = sortArr(arr, arr[0][1]);
 
 	for (let j = 0; j < outputArr.length; j++) {
 		let arr = outputArr[j];
 
-		// arr.sort((a, b) => a[1].localeCompare(b[1]));
-		// arr.sort((a, b) => b.length - a.length);
-		// arr.sort((a, b) => a[2].localeCompare(b[2]));
-		let sortArr = surtArr(arr);
+		let sortArray = sortArr(arr, arr[0][1]);
 
-		let systemName = arr[0][0];
+		let systemName = sortArray[0][0];
 		console.log(systemName);
 		let checkComponent = '';
-		for (let i = 0; i < arr.length; i++) {
+		for (let i = 0; i < sortArray.length; i++) {
 
-			let system = arr[i];
+			let system = sortArray[i];
 			let component = system[1];
 			let subcomponent = system[2];
 
@@ -103,7 +109,7 @@ newArr.push([check, counter]);
 	}
 
 
-	console.log(outputArr);
+
 
 }
 systemRegister([
