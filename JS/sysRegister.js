@@ -1,32 +1,30 @@
 function sysRegister(input) {
-
-    let array = input.map(el => el.split(' | '));
-    array.sort((a, b) => a[0].localeCompare(b[0]));
-    let checkName = array[0][0];
-    let checkComponent = '';
-    let counter = 0;
-    for (let i = 0; i < array.length; i++) {
-
-        let element = array[i];
-        let systemName = element[0];
-        let component = element[1];
-        if (systemName === checkName) {
-            if (checkComponent !== component) {
-                counter++;
-                checkComponent = component;
+    let register = {};
+    for (let el of input) {
+        let [system, component, subcomponet] = el.split(' | ');
+        if (register.hasOwnProperty(system)) {
+            let isExistComponent = false;
+            let indexComponent = -1;
+            for (let i = 0; i < register[system].length; i++) {
+                let el = register[system][i];
+                isExistComponent = el.includes(component);
+                indexComponent = i;
+                if (isExistComponent) {
+                    break;
+                }
             }
-        } else {
-            // for (let j = 0; j < i; j++) {
-            //     const element = array[j];
-            // //    array[j][0] = [checkName, counter]; ???????????????
-            // }
-            checkName = systemName;
-            counter = 0;
-        }
+            if (isExistComponent) {
+                register[system][indexComponent][1].push(subcomponet);
+            }else {
+                register[system].push([component, [subcomponet]]);
+            }
 
+        } else {
+            register[system] = [[component, [subcomponet]]];
+        }
     }
-   
-    console.log(array);
+
+    console.log(register);
 }
 sysRegister([
     'SULS | Main Site | Home Page',

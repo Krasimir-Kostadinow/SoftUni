@@ -5,6 +5,7 @@ function armies(input) {
         let isExistsLider = element.includes('arrives');
         let isDefeated = element.includes('defeated');
         let isExistsPlus = element.includes('+');
+        let isExistsFull = el.includes(':')
         if (isExistsLider) {
             let index = element.indexOf('arrives');
             element.splice(index, 1);
@@ -28,7 +29,7 @@ function armies(input) {
                     }
                 });
             }
-        } else {
+        } else if (isExistsFull) {
             let element = el.split(': ');
             let lider = element[0];
             let armiesAdd = element[1].split(', ');
@@ -36,23 +37,56 @@ function armies(input) {
             let count = Number(armiesAdd[1]);
             let isExists = armies.hasOwnProperty(lider);
             if (isExists) {
-                armies[lider].push([army, count]);
+                let isExistsArmy = false;
+                let index = 0;
+                for (let i = 0; i < armies[lider].length; i++) {
+                    let el = armies[lider][i];
+                    isExistsArmy = el.includes(army)
+                    index = i;
+                }
+                if (isExistsArmy) {
+                    armies[lider][index][1] += count;
+                } else {
+                    armies[lider].push([army, count]);
+                }
+
+
             }
         }
     }
-    console.log(armies);
+
+    for (let lider in armies) {
+        armies[lider].sort((a, b) => {
+            return b[1] - a[1];
+        })
+    }
+
+    let sorted = Object.entries(armies);
+
+    sorted.sort((a, b) => {
+        let sumLiderA = a[1].reduce((acc, el) => {
+            acc += el[1];
+            return acc;
+        }, 0);
+        let sumLiderB = b[1].reduce((acc, el) => {
+            acc += el[1];
+            return acc;
+        }, 0);
+        return sumLiderB - sumLiderA;
+    });
+
+    for (let el of sorted) {
+        let lider = el[0];
+        let totalCount = el[1].reduce((acc, el) => {
+            return acc += el[1];
+        }, 0);
+        console.log(`${lider}: ${totalCount}`);
+        let armies = el[1];
+        for (const el of armies) {
+            console.log(`>>> ${el[0]} - ${el[1]}`);
+        }
+    }
 
 }
-armies(['Rick Burr arrives',
-    'Fergus: Wexamp, 30245',
-    'Rick Burr: Juard, 50000',
-    'Findlay arrives',
-    'Findlay: Britox, 34540',
-    'Wexamp + 6000',
-    'Juard + 1350',
-    'Britox + 4500',
-    'Porter arrives',
-    'Porter: Legion, 55000',
-    'Legion + 302',
-    'Rick Burr defeated',
-    'Porter: Retix, 3205']);
+
+armies(['Rick Burr arrives', 'Findlay arrives', 'Rick Burr: Juard, 1500', 'Wexamp arrives', 'Findlay: Wexamp, 34540', 'Wexamp + 340', 'Wexamp: Britox, 1155', 'Wexamp: Juard, 43423']);
