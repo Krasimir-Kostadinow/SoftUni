@@ -15,7 +15,7 @@ function sysRegister(input) {
             }
             if (isExistComponent) {
                 register[system][indexComponent][1].push(subcomponet);
-            }else {
+            } else {
                 register[system].push([component, [subcomponet]]);
             }
 
@@ -23,22 +23,42 @@ function sysRegister(input) {
             register[system] = [[component, [subcomponet]]];
         }
     }
+    for (const system in register) {
+        let el = register[system];
+        el.sort((a, b) => {
+            return b[1].length - a[1].length;
+        });
+    }
 
-    console.log(register);
+    let sorted = Object.entries(register);
+    sorted.sort((a, b) => {
+        return a[0].localeCompare(b[0])
+    });
+    sorted.sort((a, b) => {
+        return b[1].length - a[1].length;
+    });
+
+    for (const el of sorted) {
+        console.log(el[0]);
+        for (const component of el[1]) {
+            console.log(`|||${component[0]}`);
+            component[1].forEach(subcomponet => {
+                console.log(`||||||${subcomponet}`);
+            });
+        }
+
+    }
+
 }
 sysRegister([
-    'SULS | Main Site | Home Page',
-    'SULS | Main Site | Login Page',
-    'SULS | Main Site | Register Page',
-    'SULS | Judge Site | Login Page',
-    'SULS | Judge Site | Submittion Page',
-    'Lambda | CoreA | A23',
-    'SULS | Digital Site | Login Page',
-    'Lambda | CoreB | B24',
-    'Lambda | CoreA | A24',
-    'Lambda | CoreA | A25',
-    'Lambda | CoreC | C4',
-    'Indice | Session | Default Storage',
-    'Indice | Session | Default Security'
-]
+    'Shift | Section-A | A-2',
+    'Shift | Section-A | A-3',
+    'Shift | Section-A | A-23',
+    'Shift | Section-B | B-1',
+    'Shift | Section-B | B-64',
+    'Shift | Section-B | B-56',
+    'Shit | Anex | Indie',
+    'Shit | Bider | Indie'
+    ]
+    
 );
