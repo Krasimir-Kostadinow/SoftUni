@@ -1,8 +1,9 @@
 function wordsTracker(element, input) {
-    let words = element.split(' ');
+
+    let words = arguments[0].split(' ');
     let book = {};
 
-    for (const word of input) {
+    for (const word of arguments[1]) {
         if (words.includes(word)) {
             if (book.hasOwnProperty(word)) {
                 book[word] += 1;
@@ -21,5 +22,6 @@ function wordsTracker(element, input) {
     }
 }
 wordsTracker(
-    'hello this sentence', ['In', 'this', 'sentence', 'you', 'have', 'to', 'count', 'the', 'occurences', 'of', 'the', 'words', 'this', 'and', 'sentence', 'because', 'this', 'is', 'your', 'special', 'task']
-)
+    'hello this sentence',
+    ['In', 'this', 'sentence', 'you', 'have', 'to', 'count', 'the', 'occurences', 'of', 'the', 'words', 'this', 'and', 'sentence', 'because', 'this', 'is', 'your', 'special', 'task']
+    )
