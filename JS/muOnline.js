@@ -30,8 +30,8 @@ function muOnline(input) {
             } else {
                 isDead = false;   
                 console.log(`You died! Killed by ${commandOrMonster}.`);
-                console.log(`Best room: ${i + 1}`);
-                break;
+                console.log
+                 
             }
         }
     }
