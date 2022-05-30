@@ -1,49 +1,49 @@
 function solution() {
 
-class Balloon {
-    constructor(color, hasWeight) {
-        this.color = color;
-        this.hasWeight = hasWeight;
-    }
-}
-
-class PartyBalloon extends Balloon {
-    constructor(color, hasWeight,  ribbonColor, ribbonLength) {
-        super(color, hasWeight);
-       
-        this.ribbon = {color: ribbonColor, length: ribbonLength};
-      
+    class Balloon {
+        constructor(color, hasWeight) {
+            this.color = color;
+            this.hasWeight = hasWeight;
+        }
     }
 
-    set _ribbon (newObject) {
-        this.ribbon = newObject;
-    }
-    get _ribbon() {
-        return this.ribbon;
+    class PartyBalloon extends Balloon {
+        constructor(color, hasWeight, ribbonColor, ribbonLength) {
+            super(color, hasWeight);
+
+            this._ribbon = { color: ribbonColor, length: ribbonLength };
+
+        }
+
+        // set ribbon(ribbon) {
+        //     this._ribbon = ribbon;
+        // }
+        get ribbon() {
+            return this._ribbon;
+        }
+
     }
 
-}
+    class BirthdayBalloon extends PartyBalloon {
 
-class BirthdayBalloon extends PartyBalloon {
+        constructor(color, hasWeight, ribbonColor, ribbonLength, text) {
+            super(color, hasWeight, ribbonColor, ribbonLength);
+            this.text = text;
+        }
 
-    constructor(text) {
-        super(color, hasWeight, ribbonColor, ribbonLength);
-        this.text = text;
+        set text(text) {
+            this._text = text;
+        }
+        get text() {
+            return this._text;
+        }
     }
 
-    set text(newText) {
-        this.text = newText;
+    return {
+        Balloon: Balloon,
+        PartyBalloon: PartyBalloon,
+        BirthdayBalloon: BirthdayBalloon
     }
-    get text() {
-        return this.text;
-    }
-}
-
-return {
-    Balloon: Balloon,
-    PartyBalloon: PartyBalloon,
-    BirthdayBalloon: BirthdayBalloon
-}
 }
 
 let classes = solution();
