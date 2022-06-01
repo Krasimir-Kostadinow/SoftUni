@@ -8,12 +8,11 @@ function solution() {
 
         }
         work() {
-            for (let i = 0; i < this.task.length; i++) {
-                const el = this.task.shift();
+                let el = this.task.shift();
+                this.task.push(el);
                 console.log(`${this.name} ${el}`);
-                break;
             }
-        }
+        
 
         collectSalary() {
             console.log(`${this.name} received ${this.salary} this month.`);
