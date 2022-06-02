@@ -34,27 +34,45 @@ function solution() {
         }
     }
 
+    class BlogPost extends Post {
+        constructor(title, content) {
+            super(title, content);
+            this.views = 0;
+        }
+        view() {
+            this.views = this.views + 1
+            return new BlogPost();
+        }
+
+        toString() {
+          return `${super.toString()}\nViews: ${this.views}`;
+        }
+    }
+
     return {
         Post,
-        SocialMediaPost
-
+        SocialMediaPost,
+        BlogPost
     }
 }
 
 const classes = solution();
-// let post = new classes.Post("Post", "Content");
+let post = new classes.BlogPost("Post", "Content");
+post.view();
+post.view();
+post.view();
 
-// console.log(post.toString());
+console.log(post.toString());
 
 // // Post: Post
 // // Content: Content
-let scm = new classes.SocialMediaPost("TestTitle", "TestContent", 25, 30);
+// let scm = new classes.SocialMediaPost("TestTitle", "TestContent", 25, 30);
 
-scm.addComment("Good post");
-scm.addComment("Very good post");
-scm.addComment("Wow!");
+// scm.addComment("Good post");
+// scm.addComment("Very good post");
+// scm.addComment("Wow!");
 
-console.log(scm.toString());
+// console.log(scm.toString());
 
 // Post: TestTitle
 // Content: TestContent
