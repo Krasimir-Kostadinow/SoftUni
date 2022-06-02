@@ -35,17 +35,17 @@ function solution() {
     }
 
     class BlogPost extends Post {
-        constructor(title, content) {
+        constructor(title, content, views) {
             super(title, content);
-            this.views = 0;
+            this.views = views;
         }
         view() {
-            this.views = this.views + 1
-            return new BlogPost();
+            this.views++;
+            return this;
         }
 
         toString() {
-          return `${super.toString()}\nViews: ${this.views}`;
+            return `${super.toString()}\nViews: ${this.views}`;
         }
     }
 
@@ -57,10 +57,9 @@ function solution() {
 }
 
 const classes = solution();
-let post = new classes.BlogPost("Post", "Content");
-post.view();
-post.view();
-post.view();
+let post = new classes.BlogPost("Post", "Content", 0);
+post.view().view().view();
+
 
 console.log(post.toString());
 
