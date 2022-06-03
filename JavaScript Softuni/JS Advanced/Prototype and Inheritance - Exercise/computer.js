@@ -1,4 +1,4 @@
-function createComputerHierarchy() {
+function solve() {
 
     class Keyboard {
         constructor(manufacturer, responseTime) {
@@ -16,9 +16,9 @@ function createComputerHierarchy() {
     }
 
     class Battery {
-        constructor(manufacturer, expecterLife) {
+        constructor(manufacturer, expectedLife) {
             this.manufacturer = manufacturer;
-            this.expecterLife = expecterLife;
+            this.expectedLife = expectedLife;
         }
     }
 
@@ -39,16 +39,17 @@ function createComputerHierarchy() {
             super(manufacturer, processorSpeed, ram, hardDiskSpace);
             this.weight = weight;
             this.color = color;
-            if (typeof battery !== 'object') {
-                throw new TypeError('This is not class Battery');
-            } else {
-                this._battery = battery;
-            }
+            this.battery = battery;
 
         }
 
-        set battery(battery) {
-            this._battery = battery;
+        set battery(value) {
+            
+            if (value instanceof Battery) {
+                this._battery = value;
+            } else {
+                throw new TypeError('The passed object is not of the expected instance!');
+            }
         }
         get battery() {
             return this._battery;
@@ -59,32 +60,30 @@ function createComputerHierarchy() {
     class Desktop extends Computer {
         constructor(manufacturer, processorSpeed, ram, hardDiskSpace, keyboard, monitor) {
             super(manufacturer, processorSpeed, ram, hardDiskSpace);
+            this.keyboard = keyboard;
+            this.monitor = monitor;
 
-            if (typeof keyboard !== 'object') {
-                throw new TypeError('This is not object')
-            }else {
-                this._keyboard = keyboard;
-            }
-
-            if (typeof monitor !== 'object') {
-                throw new TypeError('This is not object')
-            }else {
-                this._monitor = monitor;
-            }
-     
         }
 
 
-        set keyboard(keyboard) {
-            this._keyboard = keyboard;
+        set keyboard(value) {
+            if (value instanceof Keyboard) {
+                this._keyboard = value;
+            }else {
+                throw new TypeError('The passed object is not of the expected instance!');
+            }
         }
         get keyboard() {
             return this._keyboard;
         }
 
 
-        set monitor(monitor) {
-            this._monitor = monitor;
+        set monitor(value) {   
+            if (value instanceof Monitor) {
+                this._monitor = value;
+            }else {
+                throw new TypeError('The passed object is not of the expected instance!');
+            }
         }
         get monitor() {
             return this._monitor;
