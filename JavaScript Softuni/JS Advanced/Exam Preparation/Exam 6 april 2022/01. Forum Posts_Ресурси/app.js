@@ -15,11 +15,10 @@ function solve() {
   }
 
   function approve(e) {
-    let $li = e.target.parentElement;
-    $li.getElementsByTagName('button')[1].remove();
-    $li.getElementsByTagName('button')[0].remove();
-    let $ulPost = document.getElementById('published-list');
-    $ulPost.appendChild($li);
+    let $liPublish = e.target.parentElement;
+    $liPublish.getElementsByTagName('button')[1].remove();
+    $liPublish.getElementsByTagName('button')[0].remove();
+    $ulPost.appendChild($liPublish);
   }
 
   let $inputs = document.getElementsByTagName('input');
@@ -27,11 +26,13 @@ function solve() {
   let $publish = document.getElementById('publish-btn');
   let $ulList = document.getElementById('review-list');
   let $clearButton = document.getElementById('clear-btn');
+  let $ulPost = document.getElementById('published-list');
 
   $clearButton.addEventListener('click', function (event) {
     let $deleteList = (event.target.parentElement).children;
     let $publishedList = $deleteList[1];
     let arr = $publishedList.children;
+    
     while (arr.length > 0) {
       let del = $publishedList.getElementsByTagName('li')[0];
       del.remove();
