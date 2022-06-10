@@ -33,5 +33,5 @@ const bookSelection = {
     return resultArr;
   },
 };
-// console.log(bookSelection.isGenreSuitable('Thriller', 10)); 
+
 module.exports = bookSelection;
