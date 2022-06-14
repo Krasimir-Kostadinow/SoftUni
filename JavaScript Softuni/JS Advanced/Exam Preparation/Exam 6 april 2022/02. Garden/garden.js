@@ -54,7 +54,7 @@ class Garden {
             if (plant.plantName === plantName) {
                 if (plant.ripe) {
                     this.storage.push({ plantName: plantName, quantity: plant.quantity });
-                    this.spaceAvailavble -= plant.spaceRequired;
+                    this.spaceAvailavble += plant.spaceRequired;
                     this.plants.splice(i, 1);
                     return `The ${plantName} has been successfully harvested.`;
                 } else {
@@ -71,7 +71,7 @@ class Garden {
 
     generateReport() {
 
-        let output = `The garden has ${spaceAvailable} free space left.`;
+        let output = `The garden has ${this.spaceAvailavble} free space left.`;
         this.plants.sort((a, b) => {
             return a.plantName.localeCompare(b.plantName);
         })
@@ -86,7 +86,7 @@ class Garden {
         } else {
             let plantsInStorage = [];
             this.storage.forEach(plant => {
-                plantsInGarden.push(`${plant.plantName} (${plant.quantity})`);
+                plantsInStorage.push(`${plant.plantName} (${plant.quantity})`);
             });
             output += `\nPlants in storage: ${plantsInStorage.join(', ')}`;
         }
@@ -104,9 +104,9 @@ console.log(myGarden.addPlant('orange', 200));
 console.log(myGarden.addPlant('raspberry', 10));
 console.log(myGarden.ripenPlant('apple', 10));
 console.log(myGarden.ripenPlant('orange', 1));
-console.log(myGarden.harvestPlant('apple'));
-// console.log(myGarden.harvestPlant('raspberry'));
-console.log(myGarden.harvestPlant('olive'));
+console.log(myGarden.harvestPlant('orange'));
+console.log(myGarden.generateReport());
+
 
 
 
