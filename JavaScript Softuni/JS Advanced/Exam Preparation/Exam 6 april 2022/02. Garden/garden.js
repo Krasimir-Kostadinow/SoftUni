@@ -8,7 +8,7 @@ class Garden {
 
     addPlant(plantName, spaceRequired) {
         if (this.spaceAvailavble < spaceRequired) {
-            throw new Error('Not enough space in the garden');
+            throw new Error('Not enough space in the garden.');
         }
 
         this.plants.push({ plantName: plantName, spaceRequired: spaceRequired, ripe: false, quantity: 0 });
@@ -48,8 +48,8 @@ class Garden {
     }
 
     harvestPlant(plantName) {
-
-        for (let i = 0; i <= this.plants.length; i++) {
+        let isNotExists = false;
+        for (let i = 0; i < this.plants.length; i++) {
             let plant = this.plants[i];
             if (plant.plantName === plantName) {
                 if (plant.ripe) {
@@ -61,8 +61,11 @@ class Garden {
                     throw new Error(`The ${plantName} cannot be harvested before it is ripe.`);
                 }
             } else {
-                throw new Error(`There is no ${plantName} in the garden.`);
+                isNotExists = true;
             }
+        }
+        if (isNotExists) {
+            throw new Error(`There is no ${plantName} in the garden.`);
         }
     }
 
@@ -94,14 +97,18 @@ class Garden {
 
 }
 
+
 const myGarden = new Garden(250)
 console.log(myGarden.addPlant('apple', 20));
 console.log(myGarden.addPlant('orange', 200));
 console.log(myGarden.addPlant('raspberry', 10));
 console.log(myGarden.ripenPlant('apple', 10));
 console.log(myGarden.ripenPlant('orange', 1));
-console.log(myGarden.harvestPlant('orange'));
-console.log(myGarden.generateReport());
+console.log(myGarden.harvestPlant('apple'));
+// console.log(myGarden.harvestPlant('raspberry'));
+console.log(myGarden.harvestPlant('olive'));
+
+
 
 
 
