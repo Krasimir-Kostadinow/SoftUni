@@ -49,3 +49,6 @@ const rentCar = {
         }
     }
 }
+
+
+module.exports = rentCar;
