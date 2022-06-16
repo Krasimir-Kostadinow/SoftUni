@@ -50,5 +50,7 @@ const rentCar = {
     }
 }
 
+// console.log(rentCar.checkBudget('Opel', 3, 80));
+
 
 module.exports = rentCar;
