@@ -7,9 +7,30 @@ function solve() {
     let $inputSalary = document.getElementById('salary');
     let $buttonAddWorkrer = document.getElementById('add-worker');
 
+    function fired(event) {
+        let $tr = event.target.parentElement.parentElement;
+        let inputArr = $tr.children;
+        $tr.remove();
+        sum();
+    }
+
+    function edit(event) {
+        let $tr = event.target.parentElement.parentElement;
+        let inputArr = $tr.children;
+        $inputFirstName.value = inputArr[0].textContent;
+        $inputLastName.value = inputArr[1].textContent;
+        $inputEmail.value = inputArr[2].textContent;
+        $inputBirth.value = inputArr[3].textContent;
+        $inputPosition.value = inputArr[4].textContent;
+        $inputSalary.value = inputArr[5].textContent;
+        $tr.remove();
+        sum();
+
+    }
+
     $buttonAddWorkrer.addEventListener('click', function (event) {
         event.preventDefault();
-        if ($inputFirstName !== '' && $inputLastName !== '' && $inputEmail !== '' && $inputBrith !== '' && $inputPosition !== '' && $inputSalary !== '') {
+        if ($inputFirstName.value !== '' && $inputLastName.value !== '' && $inputEmail.value !== '' && $inputBirth.value !== '' && $inputPosition.value !== '' && $inputSalary.value !== '') {
 
             let $tr = document.createElement('tr');
 
@@ -36,13 +57,48 @@ function solve() {
             let $tdSalary = document.createElement('td');
             $tdSalary.textContent = $inputSalary.value;
             $tr.appendChild($tdSalary);
-//buttons ??
+
+            let $tdButton = document.createElement('td');
+
+            let $buttonFired = document.createElement('button');
+            $buttonFired.setAttribute('class', 'fired');
+            $buttonFired.textContent = 'Fired';
+            $buttonFired.addEventListener('click', fired);
+            $tdButton.appendChild($buttonFired);
+            let $buttonEdit = document.createElement('button');
+            $buttonEdit.setAttribute('class', 'edit');
+            $buttonEdit.textContent = 'Edit';
+            $buttonEdit.addEventListener('click', edit);
+            $tdButton.appendChild($buttonEdit);
+            $tr.appendChild($tdButton);
+
             let $tbody = document.getElementById('tbody');
             $tbody.appendChild($tr);
 
+            sum();
+
+            $inputBirth.value = '';
+            $inputEmail.value = '';
+            $inputFirstName.value = '';
+            $inputLastName.value = '';
+            $inputPosition.value = '';
+            $inputSalary.value = '';
 
         }
     });
+
+    function sum() {
+        let $tbody = document.getElementById('tbody');
+        let arr = $tbody.children;
+        let sum = 0;
+        for (const $tr of arr) {
+            let arrTd = $tr.children;
+            sum += Number(arrTd[5].textContent);
+        }
+        let $sum = document.getElementById('sum');
+        $sum.textContent = sum.toFixed(2);
+    }
+
 
 }
 solve()

@@ -11,7 +11,7 @@ function solve() {
 
     document.getElementById("add-worker").addEventListener("click", (ev) => {
         if (fname.value !== "" && lname.value !== "" && email.value !== "" && birth.value !== "" && position.value !== "" && salary.value !== "") {
-            console.log("tyk")
+            // console.log("tyk")
             addWorker(ev, fname.value, lname.value, email.value, birth.value, position.value, salary.value);
             clearInputFileds();
         }
@@ -94,4 +94,4 @@ function solve() {
     }
 
 }
-solve()
+solve()  
