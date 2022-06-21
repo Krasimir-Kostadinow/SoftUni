@@ -64,7 +64,7 @@ function solve() {
         position.value = _position;
         salary.value = _salary;
 
-        reduceSalary(_salary);
+        reduceSalary(_salary);  
 
     }
 

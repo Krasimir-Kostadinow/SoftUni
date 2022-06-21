@@ -6,34 +6,15 @@ function solve() {
     let $inputPosition = document.getElementById('position');
     let $inputSalary = document.getElementById('salary');
     let $buttonAddWorkrer = document.getElementById('add-worker');
+    const tbody = document.getElementById("tbody");
+    const addSalary = document.getElementById("sum");
 
-    function fired(event) {
-        let $tr = event.target.parentElement.parentElement;
-        let inputArr = $tr.children;
-        $tr.remove();
-        sum();
-    }
 
-    function edit(event) {
-        let $tr = event.target.parentElement.parentElement;
-        let inputArr = $tr.children;
-        $inputFirstName.value = inputArr[0].textContent;
-        $inputLastName.value = inputArr[1].textContent;
-        $inputEmail.value = inputArr[2].textContent;
-        $inputBirth.value = inputArr[3].textContent;
-        $inputPosition.value = inputArr[4].textContent;
-        $inputSalary.value = inputArr[5].textContent;
-        $tr.remove();
-        sum();
-
-    }
 
     $buttonAddWorkrer.addEventListener('click', function (event) {
         event.preventDefault();
         if ($inputFirstName.value !== '' && $inputLastName.value !== '' && $inputEmail.value !== '' && $inputBirth.value !== '' && $inputPosition.value !== '' && $inputSalary.value !== '') {
-
             let $tr = document.createElement('tr');
-
             let $tdName = document.createElement('td');
             $tdName.textContent = $inputFirstName.value;
             $tr.appendChild($tdName);
@@ -63,19 +44,21 @@ function solve() {
             let $buttonFired = document.createElement('button');
             $buttonFired.setAttribute('class', 'fired');
             $buttonFired.textContent = 'Fired';
-            $buttonFired.addEventListener('click', fired);
+            $buttonFired.addEventListener('click', (ev) => firedWorker(ev, $tdSalary.textContent));
             $tdButton.appendChild($buttonFired);
             let $buttonEdit = document.createElement('button');
             $buttonEdit.setAttribute('class', 'edit');
             $buttonEdit.textContent = 'Edit';
-            $buttonEdit.addEventListener('click', edit);
+            $buttonEdit.addEventListener('click', (ev) => editWorker(ev, $tdName.textContent, $tdLastName.textContent, $tdEmail.textContent, $tdBirth.textContent, $tdPosition.textContent, $tdSalary.textContent));
             $tdButton.appendChild($buttonEdit);
             $tr.appendChild($tdButton);
 
             let $tbody = document.getElementById('tbody');
             $tbody.appendChild($tr);
 
-            sum();
+            const currentSalary = Number(addSalary.textContent);
+            addSalary.textContent = (Number($inputSalary.value) + currentSalary).toFixed(2);
+
 
             $inputBirth.value = '';
             $inputEmail.value = '';
@@ -87,16 +70,32 @@ function solve() {
         }
     });
 
-    function sum() {
-        let $tbody = document.getElementById('tbody');
-        let arr = $tbody.children;
-        let sum = 0;
-        for (const $tr of arr) {
-            let arrTd = $tr.children;
-            sum += Number(arrTd[5].textContent);
-        }
-        let $sum = document.getElementById('sum');
-        $sum.textContent = sum.toFixed(2);
+    function firedWorker(ev, salary) {
+
+        ev.preventDefault();
+        ev.target.parentNode.parentNode.remove();
+        reduceSalary(salary);
+    }
+
+    function editWorker(ev, _fname, _lname, _email, _birth, _position, _salary) {
+
+        ev.preventDefault();
+        ev.target.parentNode.parentNode.remove();
+
+        $inputFirstName.value = _fname;
+        $inputLastName.value = _lname;
+        $inputEmail.value = _email;
+        $inputBirth.value = _birth;
+        $inputPosition.value = _position;
+        $inputSalary.value = _salary;
+
+        reduceSalary(_salary);
+
+    }
+
+    function reduceSalary(salary) {
+        const currentSalary = Number(addSalary.textContent);
+        addSalary.textContent = Math.abs((Number(salary) - currentSalary)).toFixed(2);
     }
 
 
