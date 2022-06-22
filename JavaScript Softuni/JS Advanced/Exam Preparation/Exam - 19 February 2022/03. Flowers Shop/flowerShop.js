@@ -30,3 +30,14 @@ const flowerShop = {
         return shop.join(' / ');
     }
 }
+// let result;
+// try {
+//     result = flowerShop.sellFlowers("Rose", 3);
+// } catch (error) {
+//     result = error.message;
+// }
+
+// console.log(result);
+
+
+module.exports = flowerShop;
