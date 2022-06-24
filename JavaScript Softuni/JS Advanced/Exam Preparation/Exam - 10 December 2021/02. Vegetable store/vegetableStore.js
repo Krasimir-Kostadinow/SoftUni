@@ -26,8 +26,6 @@ class VegetableStore {
                     if (!addVegetable.includes(type)) {
                         addVegetable.push(type);
                     }
-                } else {
-                    isExists = false;
                 }
             }
             if (!isExists) {
@@ -78,7 +76,7 @@ class VegetableStore {
         for (let product of this.avilableProducts) {
             if (product.type === type) {
                 isExists = true;
-                if (product.quantity <= quantity) {
+                if (product.quantity < quantity) {
                     product.quantity = 0;
                     return `The entire quantity of the ${type} has been removed.`
                 } else {
