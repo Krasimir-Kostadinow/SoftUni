@@ -14,7 +14,7 @@ class SummerCamp {
         if ((() => {
             let isExists = false;
             for (const participant of this.listOfParticipants) {
-                if (participant.condition === condition) {
+                if (participant.name === name) {
                     isExists = true;
                     break;
                 }
@@ -48,6 +48,24 @@ class SummerCamp {
     }
 
     timeToPlay(typeOfGame, firstParticipant, secondParticipant) {
+        function nameExists(firstName, secondName, listOfParticipants) {
+            let firstNameExists = false;
+            let secondNameExists = false;
+            for (const participant of listOfParticipants) {
+                if (participant.name === firstName && !firstNameExists) {
+                    firstNameExists = true;
+                }
+                if (participant.name === secondName && !secondNameExists) {
+                    secondNameExists = true;
+                }
+            }
+            if (firstNameExists && secondNameExists) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         if (typeOfGame === 'WaterBalloonFights') {
 
             if ((() => {
@@ -64,9 +82,9 @@ class SummerCamp {
 
                 }
                 if (firstPlayer !== secondPlayer) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
             })()) {
 
@@ -74,20 +92,80 @@ class SummerCamp {
 
             }
 
-        } else if (typeOfGame !== 'Battleship') {
+            if (nameExists(firstParticipant, secondParticipant, this.listOfParticipants)) {
+                throw new Error('Invalid entered name/s.');
+            }
+            let powerFirstPlayer = [];
+            let powerSecondPlayer = [];
+            for (const participant of this.listOfParticipants) {
+
+                if (participant.name === firstParticipant) {
+                    powerFirstPlayer.push(participant.name, participant.power);
+                }
+                if (participant.name === secondParticipant) {
+                    powerSecondPlayer.push(participant.name, participant.power);
+                }
+
+            }
+
+            if (Number(powerFirstPlayer[1]) > Number(powerSecondPlayer[1])) {
+
+                for (const participant of this.listOfParticipants) {
+                    if (participant.name === powerFirstPlayer[0]) {
+                        participant.wins += 1;
+                    }
+                }
+                return `The ${powerFirstPlayer[0]} is winner in the game ${typeOfGame}.`
+            } else if ((Number(powerFirstPlayer[1]) < Number(powerSecondPlayer[1]))) {
+                for (const participant of this.listOfParticipants) {
+                    if (participant.name === powerSecondPlayer[0]) {
+                        participant.wins += 1;
+                    }
+                }
+                return `The ${powerSecondPlayer[0]} is winner in the game ${typeOfGame}.`
+            } else {
+                return 'There is no winner.'
+            }
+
+        } else if (typeOfGame === 'Battleship') {
+            let isExists = false;
+            for (const participant of this.listOfParticipants) {
+                if (participant.name === firstParticipant) {
+                    isExists = true;
+                    participant.power += 20;
+                    return `The ${participant.name} successfully completed the game ${typeOfGame}.`;
+                }
+            }
+            if (!isExists) {
+                throw new Error('Invalid entered name/s.');
+            }
 
         }
     }
 
+    toString() {
+        let output = [`${this.organizer} will take ${this.listOfParticipants.length} participants on camping to ${this.location}`];
+        this.listOfParticipants.sort((a, b) => {
+            return b.wins - a.wins;
+        });
+        for (const participant of this.listOfParticipants) {
+            output.push(`${participant.name} - ${participant.condition} - ${participant.power} - ${participant.wins}`);
+        }
+        return output.join('\n');
+    }
+
 }
+
+
 
 
 const summerCamp = new SummerCamp("Jane Austen", "Pancharevo Sofia 1137, Bulgaria");
 console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
 console.log(summerCamp.timeToPlay("Battleship", "Petar Petarson"));
 console.log(summerCamp.registerParticipant("Sara Dickinson", "child", 200));
-console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Sara Dickinson"));
+// console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Sara Dickinson"));
 console.log(summerCamp.registerParticipant("Dimitur Kostov", "student", 300));
 console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Dimitur Kostov"));
 
+console.log(summerCamp.toString());
 
