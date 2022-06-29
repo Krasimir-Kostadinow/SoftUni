@@ -67,6 +67,10 @@ class SummerCamp {
         }
 
         if (typeOfGame === 'WaterBalloonFights') {
+            
+            if (nameExists(firstParticipant, secondParticipant, this.listOfParticipants)) {
+                throw new Error('Invalid entered name/s.');
+            }
 
             if ((() => {
                 let firstPlayer;
@@ -92,9 +96,7 @@ class SummerCamp {
 
             }
 
-            if (nameExists(firstParticipant, secondParticipant, this.listOfParticipants)) {
-                throw new Error('Invalid entered name/s.');
-            }
+         
             let powerFirstPlayer = [];
             let powerSecondPlayer = [];
             for (const participant of this.listOfParticipants) {
