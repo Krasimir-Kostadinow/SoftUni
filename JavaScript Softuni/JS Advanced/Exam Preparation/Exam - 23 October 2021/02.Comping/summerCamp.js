@@ -156,6 +156,7 @@ class SummerCamp {
         return output.join('\n');
     }
 
+    
 }
 
 
