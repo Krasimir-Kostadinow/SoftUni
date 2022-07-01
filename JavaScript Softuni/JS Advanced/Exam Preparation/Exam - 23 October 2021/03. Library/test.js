@@ -27,7 +27,7 @@ describe("Testes", function () {
         it("invalid input year is not integer", function () {
             let result;
             try {
-                result = library.calcPriceOfBook('Shantaram', 2.003);
+                result = library.calcPriceOfBook('Shantaram', 2.003);  
             } catch (error) {
                 result = error.message;
             }
