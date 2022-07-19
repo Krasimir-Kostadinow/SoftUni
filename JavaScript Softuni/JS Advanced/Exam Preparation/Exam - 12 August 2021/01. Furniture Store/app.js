@@ -16,6 +16,7 @@ function solve() {
 
             let $trInfo = document.createElement('tr');
             $trInfo.setAttribute('class', 'info');
+            console.log('Ok');
         }
     })
 
