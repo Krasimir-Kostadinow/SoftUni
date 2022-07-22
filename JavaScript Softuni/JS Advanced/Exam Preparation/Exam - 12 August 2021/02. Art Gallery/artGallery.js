@@ -14,7 +14,7 @@ class ArtGallery {
             for (let i = 0; i < this.listOfArticle.length; i++) {
                 let el = this.listOfArticle[i];
                 if (el.articleName === articleName) {
-                    el.quantity = quantity;
+                    el.quantity += quantity;
                     isExists = true;
                     return `Successfully added article ${articleName} with a new quantity- ${quantity}.`;
 
@@ -73,20 +73,22 @@ class ArtGallery {
         let isNotAvilable = false;
         for (let el of this.listOfArticle) {
             if (el.articleName === articleName && el.articleModel === articleModel) {
+                isExists = true;
                 if (el.quantity === 0) {
                     isNotAvilable = true;
-                    return `The ${articleName} is not available`;
                 }
-                isExists = true;
                 break;
             }
+
 
         }
 
         if (!isExists) {
             throw new Error('This article is not found.');
-        }
-
+        } else if (isNotAvilable) {
+            return `The ${articleName} is not available`;
+        } 
+        
         if (!isExistsGuest) {
             return `This guest is not invited.`;
         } else {
@@ -116,12 +118,26 @@ class ArtGallery {
     }
 
     showGalleryInfo(criteria) {
+        let output = '';
+        if (criteria === 'article') {
+            output = 'Articles information:';
+            for (const el of this.listOfArticle) {
+                output += `\n${el.articleModel} - ${el.articleName} - ${el.quantity}`;
+            }
+            return output;
 
+        } else if (criteria === 'guest') {
+            output = 'Guests information:';
+            for (const el of this.guests) {
+                output += `\n${el.guestName} - ${el.purchaseArticle}`;
+            }
+            return output;
+
+        }
     }
 
 
 }
-
 
 const artGallery = new ArtGallery('Curtis Mayfield');
 artGallery.addArticle('picture', 'Mona Liza', 3);
@@ -132,4 +148,5 @@ artGallery.inviteGuest('Peter', 'Middle');
 console.log(artGallery.buyArticle('picture', 'Mona Liza', 'John'));
 console.log(artGallery.buyArticle('item', 'Ancient vase', 'Peter'));
 console.log(artGallery.buyArticle('item', 'Mona Liza', 'John'));
+
 
