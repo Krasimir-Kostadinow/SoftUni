@@ -35,3 +35,7 @@ const cinema = {
 
     }
 };
+
+module.exports = cinema;
+// let result = cinema.showMovies(['King Kong', 'The Tomorrow War', 'Joker']);
+// console.log(result);S
