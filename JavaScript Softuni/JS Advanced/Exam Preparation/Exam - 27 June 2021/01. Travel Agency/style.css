@@ -67,7 +67,7 @@ label {
 #form {
     background: black;
     width: 600px;
-    height: 280px;
+    height: 310px;
     font-size: 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 15px;
@@ -180,7 +180,7 @@ ul li {
 
 .preview {
     width: 400px;
-    height: 230px;
+    height: 260px;
     margin-top: 20px;
     background-color: white;
     border: 1px solid black(138, 43, 226);
