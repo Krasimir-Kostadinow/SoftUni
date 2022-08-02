@@ -64,6 +64,28 @@ class Restaurant {
         return output.join('\n');
     }
 
+    makeTheOrder(meal) {
+        // let isComplete = false; ????????????
+        if (this.menu.hasOwnProperty(meal)) {
+            let needProducts = this.menu[meal].prodicts;
+            for (const el of needProducts) {
+                let [productName, productQuantity] = el.split(' ');
+                for (const product in this.stockProducts) {
+                    if (product === productName && this.stockProducts[product] >= Number(productQuantity)) {
+                        isComplete = true;
+                        break;
+                        // ?????????????
+                    }
+
+                }
+            }
+
+
+        } else {
+            return `There is not ${meal} yet in our menu, do you want to order something else?`;
+        }
+
+    }
 
 }
 
