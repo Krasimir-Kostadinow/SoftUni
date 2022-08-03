@@ -35,5 +35,9 @@ const testNumbers = {
     }
 };
 
+module.exports = testNumbers;
+
+// let result = testNumbers.averageSumArray([5, -5, 5, 6, 12, 5.12, 0]);
+// console.log(result);
 
 
