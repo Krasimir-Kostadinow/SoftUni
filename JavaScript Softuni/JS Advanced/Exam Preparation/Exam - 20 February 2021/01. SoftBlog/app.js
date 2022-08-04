@@ -23,6 +23,8 @@ function solve() {
 
       $archiveSection.appendChild($ol);
 
+      $article.remove();
+
    }
 
    function deleteArchive(event) {
@@ -49,14 +51,14 @@ function solve() {
       $article.appendChild($h1);
 
       let $pCategory = document.createElement('p');
-      $pCategory.textContent = 'Category: '
+      $pCategory.textContent = 'Category:'
       let $strongCategory = document.createElement('strong');
       $strongCategory.textContent = $category.value;
       $pCategory.appendChild($strongCategory);
       $article.appendChild($pCategory);
 
       let $pCreator = document.createElement('p');
-      $pCreator.textContent = 'Creator: '
+      $pCreator.textContent = 'Creator:'
       let $strongCreator = document.createElement('strong');
       $strongCreator.textContent = $creator.value;
       $pCreator.appendChild($strongCreator);
