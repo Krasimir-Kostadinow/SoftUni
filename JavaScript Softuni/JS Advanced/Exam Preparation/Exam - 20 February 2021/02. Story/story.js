@@ -12,7 +12,6 @@ class Story {
 
             if (obj[this.title]) {
 
-
                 if (obj[this.title].length === 0) {
                     return `${this.title} has 0 likes`;
                 } else if (obj[this.title].length === 1) {
@@ -61,24 +60,21 @@ class Story {
     }
 
     dislike(username) {
-        //     let isExists = false;
-        //     for (const obj of this._likes) {
-        //         if (this._likes[0][]) {
-        //             throw new Error("You can't dislike this story!");
-        //         }
-        //         if (obj[this.title].includes(username)) {
-        //             isExists = true;
-        //             let index = obj[this.title].indexOf(username);
-        //             obj[this.title].splice(index, 1);
-        //             return `${username} disliked ${this.title}"`;
-        //         }
 
-        //     }
-        //     if (!isExists) {
-
-        //     }
-        //???????????????
+        for (let obj of this._likes) {
+            if (obj[this.title].includes(username)) {
+                let index = obj[this.title].indexOf(username);
+                obj[this.title].splice(index, 1);
+                return `${username} disliked ${this.title}`;
+            } else {
+                throw new Error("You can't dislike this story!");
+            }
+        }
+     
     }
+
+
+
 }
 
 let art = new Story('My Story', 'Anny');
