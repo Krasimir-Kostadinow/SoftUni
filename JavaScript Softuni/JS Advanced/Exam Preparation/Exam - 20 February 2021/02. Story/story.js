@@ -114,9 +114,69 @@ class Story {
 
     }
 
+    toString(sortingType) {
+        let output = [];
+
+        output.push(`Title: ${this.title}`);
+        output.push(`Creator: ${this.creator}`);
+        let numLike;
+        for (const story of this._likes) {
+            if (story[this.title]) {
+             numLike = story[this.title].length;
+             break;
+            }
+         
+        }
+        output.push(`Likes: ${numLike}`);
+        output.push('Comments:');
+
+        if (this.comments.length > 0) {
+
+            if (sortingType === 'asc') {
+                this.comments.sort((a, b) => {
+                    return a.Id - b.Id;
+                });
+                for (const comment of this.comments) {
+                    comment.Replies.sort((a, b) => {
+                        return a.Id - b.Id;
+                    })
+                }
+            } else if (sortingType === 'desc') {
+
+                this.comments.sort((a, b) => {
+                    return b.Id - a.Id;
+                });
+                for (const comment of this.comments) {
+                    comment.Replies.sort((a, b) => {
+                        return b.Id - a.Id;
+                    })
+                }
+            } else if (sortingType === 'username') {
+                this.comments.sort((a, b) => a.Username.localeCompare(b.Username));
+                for (const comment of this.comments) {
+                    comment.Replies.sort((a, b) => a.Username.localeCompare(b.Username));
+                }
+            }
+
+            for (const comment of this.comments) {
+                output.push(`-- ${comment.Id}. ${comment.Username}: ${comment.Content}`)
+                if (comment.Replies.length > 0) {
+                    for (const reply of comment.Replies) {
+                        output.push(`--- ${reply.Id}. ${reply.Username}: ${reply.Content}`);
+                    }
+                }
+            }
+
+        }
+
+        return `${output.join('\n')}`;
+
+    }
+
 
 
 }
+
 
 let art = new Story("My Story", "Anny");
 art.like("John");
@@ -129,8 +189,11 @@ art.comment("Zane", "Reply", 1);
 art.comment("Jessy", "Nice :)");
 console.log(art.comment("SAmmy", "Reply@", 1));
 console.log()
+console.log(art.toString('username'));
+console.log()
+art.like("Zane");
+console.log(art.toString('desc'));
 
 
 
 
-   
