@@ -70,16 +70,67 @@ class Story {
                 throw new Error("You can't dislike this story!");
             }
         }
-     
+
+    }
+
+    comment(username, content, id) {
+        let idExists = false;
+        for (const comment of this.comments) {
+            if (comment.Id === id) {
+                idExists = true;
+                break;
+            }
+        }
+        if (id === undefined && !idExists) {
+            let newId;
+            if (this.comments.length === 0) {
+                newId = 1;
+            } else {
+                newId = this.comments[this.comments.length - 1].Id + 1;
+            }
+
+
+
+            this.comments.push({ Id: newId, Username: username, Content: content, Replies: [] });
+            return `${username} commented on ${this.title}`;
+
+        } else if (idExists) {
+            for (const comment of this.comments) {
+
+                if (comment.Id === id) {
+                    let newReplyId;
+                    if (comment.Replies.length === 0) {
+                        newReplyId = Number(`${id}.1`);
+                    } else {
+                        let newReplyId = comment.Replies[comment.Replies.length - 1].Id + 0.1;
+                        newReplyId = newReplyId.toFixed(1);
+                        newReplyId = Number(newReplyId);
+                    }
+                    comment.Replies.push({ Id: newReplyId, Username: username, Content: content })
+                    return 'You replied successfully';
+                }
+            }
+        }
+
     }
 
 
 
 }
 
-let art = new Story('My Story', 'Anny');
+let art = new Story("My Story", "Anny");
 art.like("John");
 console.log(art.likes);
 art.dislike("John");
 console.log(art.likes);
+art.comment("Sammy", "Some Content");
+console.log(art.comment("Ammy", "New Content"));
+art.comment("Zane", "Reply", 1);
+art.comment("Jessy", "Nice :)");
+console.log(art.comment("SAmmy", "Reply@", 1));
+console.log()
 
+
+
+
+   
