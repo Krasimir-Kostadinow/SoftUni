@@ -102,7 +102,7 @@ class Story {
                     if (comment.Replies.length === 0) {
                         newReplyId = Number(`${id}.1`);
                     } else {
-                        let newReplyId = comment.Replies[comment.Replies.length - 1].Id + 0.1;
+                        newReplyId = comment.Replies[comment.Replies.length - 1].Id + 0.1;
                         newReplyId = newReplyId.toFixed(1);
                         newReplyId = Number(newReplyId);
                     }
