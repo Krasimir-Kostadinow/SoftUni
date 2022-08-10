@@ -81,7 +81,7 @@ class Story {
                 break;
             }
         }
-        if (id === undefined && !idExists) {
+        if (id === undefined || !idExists) {
             let newId;
             if (this.comments.length === 0) {
                 newId = 1;
@@ -179,20 +179,18 @@ class Story {
 
 
 let art = new Story("My Story", "Anny");
-art.like("John");
-console.log(art.likes);
-art.dislike("John");
-console.log(art.likes);
-art.comment("Sammy", "Some Content");
-console.log(art.comment("Ammy", "New Content"));
-art.comment("Zane", "Reply", 1);
-art.comment("Jessy", "Nice :)");
-console.log(art.comment("SAmmy", "Reply@", 1));
-console.log()
-console.log(art.toString('username'));
-console.log()
-art.like("Zane");
-console.log(art.toString('desc'));
+console.log(art.like("John"));  //"John liked My Story!";
+console.log(art.likes);// "John likes this story!");
+// console.log(art.dislike("Sally"));// "You can't dislike this story!");
+console.log(art.like("Ivan"));//"Ivan liked My Story!");
+console.log(art.like("Steven"));// "Steven liked My Story!");
+console.log(art.likes);// "John and 2 others like this story!");
+console.log(art.comment("Anny", "Some Content"));//"Anny commented on My Story");
+console.log(art.comment("Ammy", "New Content", 1));//"You replied successfully");
+console.log(art.comment("Zane", "Reply", 2));//"Zane commented on My Story");
+console.log(art.comment("Jessy", "Nice :)"));// "Jessy commented on My Story");
+console.log(art.comment("SAmmy", "Reply@", 2));// "You replied successfully");
+
 
 
 
