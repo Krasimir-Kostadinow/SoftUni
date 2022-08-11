@@ -8,68 +8,47 @@ class Story {
 
 
     get likes() {
-        for (let obj of this._likes) {
 
-            if (obj[this.title]) {
 
-                if (obj[this.title].length === 0) {
-                    return `${this.title} has 0 likes`;
-                } else if (obj[this.title].length === 1) {
-                    return `${this._likes[this._likes.length - 1][this.title][(this._likes[this._likes.length - 1][this.title].length) - 1]} likes this story!`;
-                } else {
-                    return `${this._likes[this._likes.length - 1][this.title][0]} and ${this._likes[this._likes.length - 1][this.title].length - 1} others like this story!`;
-                }
-
-            }
+        if (this._likes.length === 0) {
+            return `${this.title} has 0 likes`;
+        } else if (this._likes.length === 1) {
+            return `${this._likes[0]} likes this story!`;
+        } else {
+            return `${this._likes[0]} and ${this._likes.length - 1} others like this story!`;
         }
+
+
+
     }
 
 
     like(username) {
-        let isExists = false;
-        for (const obj of this._likes) {
-            if (obj[this.title].includes(username)) {
-                isExists = true;
-                break;
-            }
 
-        }
 
-        if (isExists) {
+        if (this._likes.includes(username)) {
             throw new Error("You can't like the same story twice!");
         } else if (username === this.creator) {
             throw new Error("You can't like your own story!");
-        } else {
-            let isExistsTitle = false;
-            for (const obj of this._likes) {
-                if (obj.hasOwnProperty(this.title)) {
-                    obj[this.title].push(username);
-                    isExistsTitle = true;
-                    break;
-                }
-            }
-            if (!isExistsTitle) {
-                let obj = {};
-                obj[this.title] = [username];
-                this._likes.push(obj);
-            }
-
-            return `${username} liked ${this.title}!`;
         }
+
+        this._likes.push(username);
+
+        return `${username} liked ${this.title}!`;
+
 
     }
 
     dislike(username) {
 
-        for (let obj of this._likes) {
-            if (obj[this.title].includes(username)) {
-                let index = obj[this.title].indexOf(username);
-                obj[this.title].splice(index, 1);
-                return `${username} disliked ${this.title}`;
-            } else {
-                throw new Error("You can't dislike this story!");
-            }
+        if (this._likes.includes(username)) {
+            let index = this._likes.indexOf(username);
+            this._likes.splice(index, 1);
+            return `${username} disliked ${this.title}`;
+        } else {
+            throw new Error("You can't dislike this story!");
         }
+
 
     }
 
@@ -119,15 +98,7 @@ class Story {
 
         output.push(`Title: ${this.title}`);
         output.push(`Creator: ${this.creator}`);
-        let numLike;
-        for (const story of this._likes) {
-            if (story[this.title]) {
-             numLike = story[this.title].length;
-             break;
-            }
-         
-        }
-        output.push(`Likes: ${numLike}`);
+        output.push(`Likes: ${this._likes.length}`);
         output.push('Comments:');
 
         if (this.comments.length > 0) {
@@ -179,17 +150,27 @@ class Story {
 
 
 let art = new Story("My Story", "Anny");
-console.log(art.like("John"));  //"John liked My Story!";
+console.log(art.like("John"));// "John liked My Story!");
 console.log(art.likes);// "John likes this story!");
-// console.log(art.dislike("Sally"));// "You can't dislike this story!");
+// console.log(art.dislike("Sally")); //throw "You can't dislike this story!");
 console.log(art.like("Ivan"));//"Ivan liked My Story!");
 console.log(art.like("Steven"));// "Steven liked My Story!");
-console.log(art.likes);// "John and 2 others like this story!");
+console.log(art.likes);// "John and 2 others like this story!");???
 console.log(art.comment("Anny", "Some Content"));//"Anny commented on My Story");
 console.log(art.comment("Ammy", "New Content", 1));//"You replied successfully");
 console.log(art.comment("Zane", "Reply", 2));//"Zane commented on My Story");
 console.log(art.comment("Jessy", "Nice :)"));// "Jessy commented on My Story");
 console.log(art.comment("SAmmy", "Reply@", 2));// "You replied successfully");
+console.log(art.toString('asc'));//`Title: My Story
+// Creator: Anny
+// Likes: 3
+// Comments:
+// -- 1. Anny: Some Content
+// --- 1.1. Ammy: New Content
+// -- 2. Zane: Reply
+// --- 2.1. SAmmy: Reply@
+// -- 3. Jessy: Nice :)`);
+
 
 
 
