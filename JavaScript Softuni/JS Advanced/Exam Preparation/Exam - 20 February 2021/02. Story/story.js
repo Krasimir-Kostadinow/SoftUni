@@ -2,11 +2,10 @@ class Story {
     constructor(title, creator) {
         this.title = title;
         this.creator = creator;
-        this.comments = [];
+        this._comments = [];
         this._likes = [];
     }
-
-
+ 
     get likes() {
 
 
@@ -14,11 +13,9 @@ class Story {
             return `${this.title} has 0 likes`;
         } else if (this._likes.length === 1) {
             return `${this._likes[0]} likes this story!`;
-        } else {
-            return `${this._likes[0]} and ${this._likes.length - 1} others like this story!`;
         }
 
-
+        return `${this._likes[0]} and ${this._likes.length - 1} others like this story!`;
 
     }
 
@@ -49,50 +46,38 @@ class Story {
             throw new Error("You can't dislike this story!");
         }
 
-
     }
-
+ 
     comment(username, content, id) {
-        let idExists = false;
-        for (const comment of this.comments) {
-            if (comment.Id === id) {
-                idExists = true;
-                break;
-            }
+        let comment = {
+            Id: id,
+            Username: username,
+            Content: content,
+            Replies: [],
+        };
+ 
+        let commentWithId = this._comments.find(c => c.Id === id);
+ 
+        if (commentWithId) {
+            let replyID = Number(commentWithId.Id + '.' + (commentWithId.Replies.length + 1));
+            let reply = {
+                Id: replyID,
+                Username: username,
+                Content: content,
+            };
+ 
+            commentWithId.Replies.push(reply);
+ 
+            return 'You replied successfully';
         }
-        if (id === undefined || !idExists) {
-            let newId;
-            if (this.comments.length === 0) {
-                newId = 1;
-            } else {
-                newId = this.comments[this.comments.length - 1].Id + 1;
-            }
-
-
-
-            this.comments.push({ Id: newId, Username: username, Content: content, Replies: [] });
-            return `${username} commented on ${this.title}`;
-
-        } else if (idExists) {
-            for (const comment of this.comments) {
-
-                if (comment.Id === id) {
-                    let newReplyId;
-                    if (comment.Replies.length === 0) {
-                        newReplyId = Number(`${id}.1`);
-                    } else {
-                        newReplyId = comment.Replies[comment.Replies.length - 1].Id + 0.1;
-                        newReplyId = newReplyId.toFixed(1);
-                        newReplyId = Number(newReplyId);
-                    }
-                    comment.Replies.push({ Id: newReplyId, Username: username, Content: content })
-                    return 'You replied successfully';
-                }
-            }
-        }
-
+ 
+        comment.Id = this._comments.length + 1;
+        this._comments.push(comment);
+ 
+        return `${username} commented on ${this.title}`;
     }
 
+    
     toString(sortingType) {
         let output = [];
 
@@ -101,35 +86,35 @@ class Story {
         output.push(`Likes: ${this._likes.length}`);
         output.push('Comments:');
 
-        if (this.comments.length > 0) {
+        if (this._comments.length > 0) {
 
             if (sortingType === 'asc') {
-                this.comments.sort((a, b) => {
+                this._comments.sort((a, b) => {
                     return a.Id - b.Id;
                 });
-                for (const comment of this.comments) {
+                for (const comment of this._comments) {
                     comment.Replies.sort((a, b) => {
                         return a.Id - b.Id;
                     })
                 }
             } else if (sortingType === 'desc') {
 
-                this.comments.sort((a, b) => {
+                this._comments.sort((a, b) => {
                     return b.Id - a.Id;
                 });
-                for (const comment of this.comments) {
+                for (const comment of this._comments) {
                     comment.Replies.sort((a, b) => {
                         return b.Id - a.Id;
                     })
                 }
             } else if (sortingType === 'username') {
-                this.comments.sort((a, b) => a.Username.localeCompare(b.Username));
-                for (const comment of this.comments) {
+                this._comments.sort((a, b) => a.Username.localeCompare(b.Username));
+                for (const comment of this._comments) {
                     comment.Replies.sort((a, b) => a.Username.localeCompare(b.Username));
                 }
             }
 
-            for (const comment of this.comments) {
+            for (const comment of this._comments) {
                 output.push(`-- ${comment.Id}. ${comment.Username}: ${comment.Content}`)
                 if (comment.Replies.length > 0) {
                     for (const reply of comment.Replies) {
@@ -145,9 +130,7 @@ class Story {
     }
 
 
-
 }
-
 
 let art = new Story("My Story", "Anny");
 console.log(art.like("John"));// "John liked My Story!");
@@ -170,9 +153,3 @@ console.log(art.toString('asc'));//`Title: My Story
 // -- 2. Zane: Reply
 // --- 2.1. SAmmy: Reply@
 // -- 3. Jessy: Nice :)`);
-
-
-
-
-
-
