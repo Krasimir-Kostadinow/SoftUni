@@ -31,3 +31,8 @@ const numberOperations = {
         return resultArr
     }
 };
+
+module.exports = numberOperations;
+
+// let result = numberOperations.numberChecker('55');
+// console.log(result);
