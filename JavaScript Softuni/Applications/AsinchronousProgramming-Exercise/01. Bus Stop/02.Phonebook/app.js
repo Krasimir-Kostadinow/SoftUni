@@ -24,14 +24,20 @@ function attachEvents() {
                         delete data[key];
                     }
                 }
-                let array = Object.keys(data)
+                let array;
+                if (data === null) {
+                    array = [null];
+                } else {
+                    array = Object.keys(data)
+                }
+
                 fetch(`https://virtual-plating-360306-default-rtdb.europe-west1.firebasedatabase.app/phonebook/${Number(array[array.length - 1]) + 1}.json`, {
                     method: 'PATCH',
                     body: JSON.stringify(newPerson)
                 });
             });
 
-        loadListPhone();
+  
 
         $inputPerson.value = '';
         $inputPhone.value = '';
@@ -60,7 +66,14 @@ function attachEvents() {
                         delete data[key];
                     }
                 }
-                let array = Object.keys(data)
+
+                let array;
+                if (data === null) {
+                    array = [];
+                } else {
+                    array = Object.keys(data)
+                }
+              
                 $ul.textContent = '';
                 for (let i = 0; i < array.length; i++) {
                     let key = array[i];
@@ -75,7 +88,7 @@ function attachEvents() {
                 }
             });
     }
-   
+
 
 }
 
