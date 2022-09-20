@@ -13,6 +13,7 @@ function solve() {
         fetch(`https://virtual-plating-360306-default-rtdb.europe-west1.firebasedatabase.app/schedule/${id}.json`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 $info.textContent = `Next stop ${data.name}`;
                 $btnDepart.setAttribute('disabled', 'true');
                 $btnArrive.removeAttribute('disabled');
@@ -24,6 +25,7 @@ function solve() {
         fetch(`https://virtual-plating-360306-default-rtdb.europe-west1.firebasedatabase.app/schedule/${id}.json`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             $info.textContent = `Arriving at ${data.name}`;
             id = data.next;
             $btnArrive.setAttribute('disabled', 'true');
