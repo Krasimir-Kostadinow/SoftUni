@@ -82,6 +82,7 @@ function attachEvents() {
                     let $btnDelete = document.createElement('button');
                     $btnDelete.addEventListener('click', deletePhone);
                     $btnDelete.textContent = 'Delete';
+                    
                     $li.textContent = `${data[key].person} ${data[key].phone}`;
                     $li.appendChild($btnDelete);
                     $ul.appendChild($li);
