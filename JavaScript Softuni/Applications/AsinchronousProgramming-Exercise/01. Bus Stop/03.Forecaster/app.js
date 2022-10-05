@@ -16,6 +16,16 @@
         Degrees: '&#176'
     }
 
+    function throwOfError(err) {
+        $elements.divCurrent.innerHTML = '';
+        $elements.divUpcoming.innerHTML = '';
+        let $divLabel = document.createElement('div');
+        $divLabel.setAttribute('class', 'label');
+        $divLabel.textContent = err.message;
+        $elements.divCurrent.appendChild($divLabel);
+        $elements.divForecast.style.display = 'block';
+    }
+
 
     $elements.buttonSubmit.addEventListener('click', function () {
 
@@ -73,7 +83,7 @@
                                 $elements.divForecast.style.display = 'block';
 
                             })
-                            .catch((err) => console.log(err.message));
+                            .catch(throwOfError);
                     }
                 });
                 if (!isExists) {
@@ -118,17 +128,10 @@
                             });
 
                         })
+                        .catch(throwOfError);
                 }
             })
-            .catch((err) => {
-                $elements.divCurrent.innerHTML = '';
-                $elements.divUpcoming.innerHTML = '';
-                let $divLabel = document.createElement('div');
-                $divLabel.setAttribute('class', 'label');
-                $divLabel.textContent = err.message;
-                $elements.divCurrent.appendChild($divLabel);
-                $elements.divForecast.style.display = 'block';
-            });
+            .catch(throwOfError);
 
 
 
