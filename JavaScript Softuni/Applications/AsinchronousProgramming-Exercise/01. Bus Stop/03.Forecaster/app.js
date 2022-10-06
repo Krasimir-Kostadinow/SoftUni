@@ -27,115 +27,112 @@
     }
 
 
-    $elements.buttonSubmit.addEventListener('click', function () {
-
+    function requestData() {
 
         fetch(`${baseURL}/locations.json`)
             .then((response) => response.json())
             .then((data) => {
                 const currentLocation = $elements.location.value;
-                let isExists = false;
-                let codeUpcoming;
-                data.forEach(location => {
-                    if (location.name === currentLocation) {
-                        isExists = true;
-                        const code = location.code;
-                        codeUpcoming = code;
-                        fetch(`${baseURL}/today/${code}.json`)
-                            .then((res) => res.json())
-                            .then((data) => {
-                                $elements.divCurrent.innerHTML = '';
-
-                                let $divLabel = document.createElement('div');
-                                $divLabel.setAttribute('class', 'label');
-                                $divLabel.textContent = 'Current conditions';
-                                $elements.divCurrent.appendChild($divLabel);
-
-
-                                let $divForecasts = document.createElement('div');
-                                $divForecasts.setAttribute('class', 'forecasts');
-                                $elements.divCurrent.appendChild($divForecasts);
-
-                                let $spanSimbol = document.createElement('span');
-                                $spanSimbol.setAttribute('class', 'condition symbol');
-                                $spanSimbol.innerHTML = conditions[data.forecast.condition];
-                                $divForecasts.appendChild($spanSimbol);
-
-                                let $spanCondition = document.createElement('span');
-                                $spanCondition.setAttribute('class', 'condition');
-                                $divForecasts.appendChild($spanCondition);
-
-                                let $spanName = document.createElement('span');
-                                $spanName.setAttribute('class', 'forecast-data');
-                                $spanName.textContent = data.name;
-                                $spanCondition.appendChild($spanName);
-
-                                let $spanDegrees = document.createElement('span');
-                                $spanDegrees.setAttribute('class', 'forecast-data');
-                                $spanDegrees.innerHTML = `${data.forecast.low}${conditions.Degrees}/${data.forecast.high}${conditions.Degrees}`;
-                                $spanCondition.appendChild($spanDegrees);
-
-                                let $spanCond = document.createElement('span');
-                                $spanCond.setAttribute('class', 'forecast-data');
-                                $spanCond.textContent = `${data.forecast.condition}`;
-                                $spanCondition.appendChild($spanCond);
-
-                                $elements.divForecast.style.display = 'block';
-
-                            })
-                            .catch(throwOfError);
-                    }
-                });
-                if (!isExists) {
-                    throw new Error('Error not found location');
+                let existsObject = data.find((o) => o.name === currentLocation);
+                let code;
+                if (existsObject !== undefined) {
+                    code = existsObject.code;
+                } else {
+                    throw new Error('Not found location');
                 }
-                if (isExists) {
-                    fetch(`${baseURL}/upcoming/${codeUpcoming}.json`)
-                        .then((response) => response.json())
-                        .then((data) => {
-                            $elements.divUpcoming.innerHTML = '';
 
+
+                Promise.all([fetch(`${baseURL}/today/${code}.json`).then((res) => res.json()), fetch(`${baseURL}/upcoming/${code}.json`).then((response) => response.json())])
+                    .then(([today, upcoming]) => {
+                        console.log(today);
+                        console.log(upcoming);
+                        function todayData(today) {
+                            $elements.divCurrent.innerHTML = '';
+                    
+                            let $divLabel = document.createElement('div');
+                            $divLabel.setAttribute('class', 'label');
+                            $divLabel.textContent = 'Current conditions';
+                            $elements.divCurrent.appendChild($divLabel);
+                    
+                    
+                            let $divForecasts = document.createElement('div');
+                            $divForecasts.setAttribute('class', 'forecasts');
+                            $elements.divCurrent.appendChild($divForecasts);
+                    
+                            let $spanSimbol = document.createElement('span');
+                            $spanSimbol.setAttribute('class', 'condition symbol');
+                            $spanSimbol.innerHTML = conditions[today.forecast.condition];
+                            $divForecasts.appendChild($spanSimbol);
+                    
+                            let $spanCondition = document.createElement('span');
+                            $spanCondition.setAttribute('class', 'condition');
+                            $divForecasts.appendChild($spanCondition);
+                    
+                            let $spanName = document.createElement('span');
+                            $spanName.setAttribute('class', 'forecast-data');
+                            $spanName.textContent = today.name;
+                            $spanCondition.appendChild($spanName);
+                    
+                            let $spanDegrees = document.createElement('span');
+                            $spanDegrees.setAttribute('class', 'forecast-data');
+                            $spanDegrees.innerHTML = `${today.forecast.low}${conditions.Degrees}/${today.forecast.high}${conditions.Degrees}`;
+                            $spanCondition.appendChild($spanDegrees);
+                    
+                            let $spanCond = document.createElement('span');
+                            $spanCond.setAttribute('class', 'forecast-data');
+                            $spanCond.textContent = `${today.forecast.condition}`;
+                            $spanCondition.appendChild($spanCond);
+                    
+                            $elements.divForecast.style.display = 'block';
+                        }
+                    
+                        function upcomingData(upcoming) {
+                            $elements.divUpcoming.innerHTML = '';
+                    
                             let $divLabel = document.createElement('div');
                             $divLabel.setAttribute('class', 'label');
                             $divLabel.textContent = 'Three-day forecast ';
                             $elements.divUpcoming.appendChild($divLabel);
-
-
+                    
+                    
                             let $divForecastInfo = document.createElement('div');
                             $divForecastInfo.setAttribute('class', 'forecast-info');
                             $elements.divUpcoming.appendChild($divForecastInfo);
-
-                            data.forecast.forEach(el => {
+                    
+                            upcoming.forecast.forEach(el => {
                                 let $spanUpcoming = document.createElement('span');
                                 $spanUpcoming.setAttribute('class', 'upcoming');
                                 $divForecastInfo.appendChild($spanUpcoming);
-
+                    
                                 let $spanSymbol = document.createElement('span');
                                 $spanSymbol.setAttribute('class', 'symbol');
                                 $spanSymbol.innerHTML = conditions[el.condition.split(' ').join('')];
                                 $spanUpcoming.appendChild($spanSymbol);
-
+                    
                                 let $spanDegrees = document.createElement('span');
                                 $spanDegrees.setAttribute('class', 'forecast-data');
                                 $spanDegrees.innerHTML = `${el.low}${conditions.Degrees}/${el.high}${conditions.Degrees}`;
                                 $spanUpcoming.appendChild($spanDegrees);
-
+                    
                                 let $spanCond = document.createElement('span');
                                 $spanCond.setAttribute('class', 'forecast-data');
                                 $spanCond.textContent = `${el.condition}`;
                                 $spanUpcoming.appendChild($spanCond);
+                    
+                            })
+                        }
+                        todayData(today);
+                        upcomingData(upcoming);
 
-                            });
-
-                        })
-                        .catch(throwOfError);
-                }
-            })
-            .catch(throwOfError);
+                    })
+                    .catch(throwOfError);
 
 
+            }).catch(throwOfError);
 
-    });
+    }
+
+    $elements.buttonSubmit.addEventListener('click', requestData);
 
 
 })();
