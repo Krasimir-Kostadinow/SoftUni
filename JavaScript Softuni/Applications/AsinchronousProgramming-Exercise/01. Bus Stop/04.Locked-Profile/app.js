@@ -7,6 +7,8 @@ function lockedProfile() {
         main: document.querySelector('#main')
     }
 
+
+
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -18,13 +20,21 @@ function lockedProfile() {
                 let elementsProfile = {
                     userName: cloneProfile.querySelectorAll('input')[2],
                     email: cloneProfile.querySelectorAll('input')[3],
-                    age: cloneProfile.querySelectorAll('input')[4]
+                    age: cloneProfile.querySelectorAll('input')[4],
+                    infoUser: cloneProfile.querySelector('.user1Username'),
+                    button: cloneProfile.querySelector('button'),
+                    
                 }
 
                 cloneProfile.setAttribute('id', _id);
                 elementsProfile.userName.value = username;
                 elementsProfile.email.value = email;
                 elementsProfile.age.value = age;
+                elementsProfile.infoUser.style.display = 'none';
+                elementsProfile.button.addEventListener('click', (event) => {
+                    
+                });
+
 
 
 
