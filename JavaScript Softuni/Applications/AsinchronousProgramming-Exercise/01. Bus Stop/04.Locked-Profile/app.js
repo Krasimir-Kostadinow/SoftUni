@@ -63,58 +63,81 @@ function lockedProfile() {
     //     .catch((e) => console.log(e.message));
 
     async function request() {
-        let response = await fetch(`${url}.json`);
-        let data = await response.json();
-        Object.values(data).forEach(el => {
-            let cloneProfile = domElements.profile.cloneNode(true);
-            const { _id, age, email, username } = el;
-            console.log(el);
-            let elementsProfile = {
-                userName: cloneProfile.querySelectorAll('input')[2],
-                infoUser: cloneProfile.querySelector('.user1Username'),
-                button: cloneProfile.querySelector('button'),
-       
-            }
 
-            cloneProfile.setAttribute('id', _id);
-            elementsProfile.userName.value = username;
-            elementsProfile.infoUser.style.display = 'none';
-            elementsProfile.button.addEventListener('click', requestInfoProfile);
-            domElements.main.append(cloneProfile);
-        });
+        try {
+            let response = await fetch(`${url}.json`);
+            let data = await response.json();
+            Object.values(data).forEach(el => {
+                let cloneProfile = domElements.profile.cloneNode(true);
+                const { _id, age, email, username } = el;
 
-        domElements.profile.remove();
+                let elementsProfile = {
+                    userName: cloneProfile.querySelectorAll('input')[2],
+                    infoUser: cloneProfile.querySelector('.user1Username'),
+                    button: cloneProfile.querySelector('button'),
+
+                }
+
+                cloneProfile.setAttribute('id', _id);
+                elementsProfile.userName.value = username;
+                elementsProfile.infoUser.style.display = 'none';
+                elementsProfile.button.addEventListener('click', requestInfoProfile);
+                domElements.main.append(cloneProfile);
+            });
+
+            domElements.profile.remove();
+        } catch (error) {
+            let h1Error = document.createElement('h1');
+            h1Error.textContent = error.message;
+            h1Error.style.color = 'red';
+            h1Error.style.textAlign = 'center';
+            document.querySelector('#container').appendChild(h1Error);
+        }
+
+
 
     }
 
     async function requestInfoProfile(event) {
-        let $divProfile = event.target.parentElement;
-        let $button = event.target;
-        let $domElements = {
-            checkUnlock: $divProfile.querySelectorAll('input')[1],
-            email: $divProfile.querySelectorAll('input')[3],
-            age: $divProfile.querySelectorAll('input')[4],
-            infoUser: $divProfile.querySelector('.user1Username'),
-        }
 
-        if ($domElements.checkUnlock.checked === true) {
-            if ($button.textContent === 'Show more') {
-                let id = event.target.parentElement.getAttribute('id');
-                console.log(id);
-                let response = await fetch(`${url}/${id}.json`);
-                let data = await response.json();
-                console.log(data);
-                $domElements.email.value = data.email;
-                $domElements.age.value = data.age;
-
-                $domElements.infoUser.style.display = 'block';
-                $button.textContent = 'Hide it';
-            } else if ($button.textContent === 'Hide it') {
-                $domElements.infoUser.style.display = 'none';
-                $button.textContent = 'Show more';
+        try {
+            let $divProfile = event.target.parentElement;
+            let $button = event.target;
+            let $domElements = {
+                checkUnlock: $divProfile.querySelectorAll('input')[1],
+                email: $divProfile.querySelectorAll('input')[3],
+                age: $divProfile.querySelectorAll('input')[4],
+                infoUser: $divProfile.querySelector('.user1Username'),
             }
 
+            if ($domElements.checkUnlock.checked === true) {
+                if ($button.textContent === 'Show more') {
+                    let id = event.target.parentElement.getAttribute('id');
+
+                    let response = await fetch(`${url}/${id}.json`);
+                    let data = await response.json();
+
+                    $domElements.email.value = data.email;
+                    $domElements.age.value = data.age;
+
+                    $domElements.infoUser.style.display = 'block';
+                    $button.textContent = 'Hide it';
+                } else if ($button.textContent === 'Hide it') {
+                    $domElements.infoUser.style.display = 'none';
+                    $button.textContent = 'Show more';
+                }
+
+            }
+        } catch (error) {
+            let $h1 = document.createElement('h1');
+            $h1.textContent = error.message;
+            $h1.style.color = 'red';
+            $h1.style.textAlign = 'center';
+            let $container = document.querySelector('#container');
+            $container.appendChild($h1);
         }
+
+
     }
     request();
 
