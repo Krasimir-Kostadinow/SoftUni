@@ -1,4 +1,6 @@
+import * as dataAsync from "./data.js";
 (() => {
+
     const baseURL = 'https://virtual-plating-360306-default-rtdb.europe-west1.firebasedatabase.app';
     const $elements = {
         location: document.querySelector('#location'),
@@ -211,9 +213,10 @@
 
         try {
 
-            let location = await fetch(`${baseURL}/locations.json`).then((response) => response.json());
+            let location = await dataAsync.getDataLocation();
+            console.log(location);
             const currentLocation = $elements.location.value;
-            let existsObject = location.find((o) => o.name === currentLocation);
+            let existsObject = location.find((o) => o.name.toLowerCase() === currentLocation.toLowerCase());
             let code;
             if (existsObject !== undefined) {
                 code = existsObject.code;
