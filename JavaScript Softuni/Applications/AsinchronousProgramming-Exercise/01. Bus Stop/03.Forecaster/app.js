@@ -11,11 +11,11 @@ import * as dataAsync from "./data.js";
     };
 
     const conditions = {
-        Sunny: '&#x2600',
-        Partlysunny: '&#x26C5',
-        Overcast: '&#x2601',
-        Rain: '&#x2614',
-        Degrees: '&#176'
+        'Sunny': '&#x2600;',
+        'Partly sunny': '&#x26C5;',
+        'Overcast': '&#x2601;',
+        'Rain': '&#x2614;',
+        'Degrees': '&#176;'
     }
 
     function throwOfError(err) {
@@ -23,11 +23,12 @@ import * as dataAsync from "./data.js";
         $elements.divUpcoming.innerHTML = '';
         let $divLabel = document.createElement('div');
         $divLabel.setAttribute('class', 'label');
-        $divLabel.textContent = err.message;
+        $divLabel.textContent = `Error: ${err.message}`;
+        $divLabel.style.color = 'red';
         $elements.divCurrent.appendChild($divLabel);
         $elements.divForecast.style.display = 'block';
     }
-    
+
     function todayData(today) {
         $elements.divCurrent.innerHTML = '';
 
@@ -88,7 +89,7 @@ import * as dataAsync from "./data.js";
 
             let $spanSymbol = document.createElement('span');
             $spanSymbol.setAttribute('class', 'symbol');
-            $spanSymbol.innerHTML = conditions[el.condition.split(' ').join('')];
+            $spanSymbol.innerHTML = conditions[el.condition];
             $spanUpcoming.appendChild($spanSymbol);
 
             let $spanDegrees = document.createElement('span');
@@ -212,25 +213,18 @@ import * as dataAsync from "./data.js";
     async function requestDataAsync() {
 
         try {
-
-            let location = await dataAsync.getDataLocation();
-            console.log(location);
             const currentLocation = $elements.location.value;
-            let existsObject = location.find((o) => o.name.toLowerCase() === currentLocation.toLowerCase());
-            let code;
-            if (existsObject !== undefined) {
-                code = existsObject.code;
-            } else {
-                throw new Error('Not found location');
-            }
+            let location = await dataAsync.getDataLocation(currentLocation);
+            let idLocation = location.code;
+            let todayPromis = dataAsync.getDataToday(idLocation);
+            let upcomingPromis = dataAsync.getDataUncoming(idLocation);
 
-            let today = await fetch(`${baseURL}/today/${code}.json`).then((res) => res.json());
-            let upcoming = await fetch(`${baseURL}/upcoming/${code}.json`).then((response) => response.json());
+            const [today, upcoming] = [await todayPromis, await upcomingPromis];
 
             todayData(today);
             upcomingData(upcoming);
 
- 
+
         } catch (error) {
             throwOfError(error);
         }
