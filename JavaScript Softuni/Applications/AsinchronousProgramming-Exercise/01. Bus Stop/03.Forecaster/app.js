@@ -1,7 +1,6 @@
 import * as dataAsync from "./data.js";
 (() => {
 
-    const baseURL = 'https://virtual-plating-360306-default-rtdb.europe-west1.firebasedatabase.app';
     const $elements = {
         location: document.querySelector('#location'),
         buttonSubmit: document.querySelector('#submit'),
@@ -74,7 +73,7 @@ import * as dataAsync from "./data.js";
 
         let $divLabel = document.createElement('div');
         $divLabel.setAttribute('class', 'label');
-        $divLabel.textContent = 'Three-day forecast ';
+        $divLabel.textContent = 'Three-day forecast';
         $elements.divUpcoming.appendChild($divLabel);
 
 
