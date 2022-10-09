@@ -1,6 +1,7 @@
 import * as dataAsync from "./data.js";
 (() => {
-
+window.addEventListener('load', createPage);
+function createPage() {
     const $elements = {
         location: document.querySelector('#location'),
         buttonSubmit: document.querySelector('#submit'),
@@ -233,6 +234,8 @@ import * as dataAsync from "./data.js";
     }
 
     $elements.buttonSubmit.addEventListener('click', requestDataAsync);
+}
+
 
 
 })();
