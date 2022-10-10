@@ -219,8 +219,9 @@ function createPage() {
             let todayPromis = dataAsync.getDataToday(idLocation);
             let upcomingPromis = dataAsync.getDataUncoming(idLocation);
 
+ 
             const [today, upcoming] = [await todayPromis, await upcomingPromis];
-
+            console.log(today);
             todayData(today);
             upcomingData(upcoming);
 
@@ -228,8 +229,6 @@ function createPage() {
         } catch (error) {
             throwOfError(error);
         }
-
-
 
     }
 
