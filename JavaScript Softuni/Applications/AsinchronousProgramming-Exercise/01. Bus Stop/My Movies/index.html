@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>My Movies</title>
+</head>
+
+<body>
+    <h2>Guest</h2>
+    <div class="form-login">
+        <label for="userName">Username: </label><input id="userName" type="text" />
+        <label for="password">Password: </label><input id="password" type="text" />
+        <button>Login</button>
+        <ul id="movies"></ul>
+        <div id="movie-details">Please select movie</div>
+        <script type="module" src="./auth.js"></script>
+        <script>
+
+            let $movies = document.querySelector('#movies');
+            let $movieDetails = document.querySelector('#movie-details');
+            const baseUrl = 'https://my-movies-eacd7-default-rtdb.firebaseio.com/';
+            fetch(`${baseUrl}/movies.json`)
+                .then((response) => response.json())
+                .then((data) => {
+
+                    let titleList = Object.keys(data)
+                        .map((el) => {
+                            return `<li class = 'movie-item' data-key = '${el}'>${data[el].title}</li>`;
+                        })
+                        .join('');
+                    $movies.innerHTML = titleList;
+                })
+                .catch((error) => console.log(error));
+
+            $movies.addEventListener('click', (event) => {
+                let $li = event.target;
+                let id = $li.dataset.key;
+                console.log(id);
+            });
+
+
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+.movie-item {
+    cursor: pointer;
+}
+
+.movie-item:hover {
+  background-color: burlywood;
+}
