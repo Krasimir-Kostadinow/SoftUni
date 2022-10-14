@@ -1,0 +1,78 @@
+.movie-item {
+  cursor: pointer;
+}
+
+.movie-item:hover {
+  background-color: burlywood;
+}
+
+.form-login>button {
+  margin-top: 10px;
+  color: white;
+  border-radius: 4px;
+  border-color: rgb(97, 148, 21);
+  background-color: rgb(97, 148, 21);
+}
+
+.form-login>button:hover {
+  margin-top: 10px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border-color: rgb(97, 148, 21);
+  background-color: rgb(74, 110, 20);
+}
+
+
+
+.logaut {
+  color: rgb(48, 152, 0);
+  display: none;
+}
+
+.logaut:hover {
+  color: rgb(171, 58, 58);
+  display: inline;
+  cursor: pointer;
+}
+
+.login-userName {
+  color: rgb(70, 70, 222);
+}
+
+.register {
+  color: rgb(171, 58, 58);
+  text-decoration: none;
+
+}
+
+.register:hover {
+  color: rgb(48, 152, 0);
+  cursor: pointer;
+}
+
+.registration {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.register-form {
+  display: none;
+}
+
+.register-form>button {
+  margin-top: 10px;
+  color: white;
+  border-radius: 4px;
+  border-color: rgb(97, 148, 21);
+  background-color: rgb(97, 148, 21);
+}
+
+.register-form>button:hover {
+  margin-top: 10px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border-color: rgb(97, 148, 21);
+  background-color: rgb(74, 110, 20);
+}
