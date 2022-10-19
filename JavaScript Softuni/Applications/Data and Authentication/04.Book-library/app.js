@@ -4,6 +4,7 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
 
     const formEl = document.querySelector('form');
     const btnLoadEl = document.querySelector('#loadBooks');
+    loadListEl();
 
     function createEl(tagName, content, attributeName, attributeValue) {
         const tagEl = document.createElement(tagName);
@@ -26,7 +27,11 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
         const btnForm = formEl.querySelector('button');
         const currentIdBook = event.target.dataset.idbook;
         btnForm.setAttribute('data-idbook', currentIdBook);
-
+        const editCurrentBookEl = event.target.parentElement.parentElement;
+        const [editTitle, editAuthor] = editCurrentBookEl.querySelectorAll('td');
+        const { title, author } = formEl.elements;
+        title.value = editTitle.textContent;
+        author.value = editAuthor.textContent;
         const h3 = formEl.querySelector('h3');
         const buttonForm = formEl.querySelector('button');
         h3.textContent = 'Edit FORM';
@@ -47,12 +52,13 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
             if (dataBooks !== null) {
                 Object.entries(dataBooks).forEach(book => {
 
-                    const [idBook, { title, author }] = book;
+                    const [idBook, { author, title }] = book;
                     let trEl = createEl('tr', '');
                     let tdAuthor = createEl('td', author);
                     let tdTitle = createEl('td', title);
-                    trEl.appendChild(tdAuthor);
+
                     trEl.appendChild(tdTitle);
+                    trEl.appendChild(tdAuthor);
 
                     let tdButtons = createEl('td');
                     let btnEdit = createEl('button', 'Edit', 'data-idBook', idBook);
@@ -81,22 +87,24 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
         if (nameButton.textContent === 'Submit') {
 
             if (title.value !== '' && author.value !== '') {
-                Promise.all([createBook(author.value, title.value), loadListEl()]);
+                createBook(title.value, author.value);
                 title.value = '';
                 author.value = '';
             }
         } else if (nameButton.textContent === 'Save') {
             if (title.value !== '' && author.value !== '') {
                 const idBook = nameButton.dataset.idbook;
-                Promise.all([requestEditBook(idBook, author.value, title.value), loadListEl()]);
-
+                requestEditBook(idBook, author.value, title.value);
+           
+                author.value = '';
+                title.value = '';
             }
         } else {
             throw new Error('Button name is not correct.')
         }
 
 
-
+        loadListEl();
 
     });
 
