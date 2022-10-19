@@ -46,6 +46,9 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
         const buttonForm = formEl.querySelector('button');
         h3.textContent = 'FORM';
         buttonForm.textContent = 'Submit';
+        const {author, title} = formEl.elements;
+        author.value = '';
+        title.value = '';
 
         getBooks().then((dataBooks) => {
 
@@ -95,7 +98,6 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
             if (title.value !== '' && author.value !== '') {
                 const idBook = nameButton.dataset.idbook;
                 requestEditBook(idBook, author.value, title.value);
-           
                 author.value = '';
                 title.value = '';
             }
