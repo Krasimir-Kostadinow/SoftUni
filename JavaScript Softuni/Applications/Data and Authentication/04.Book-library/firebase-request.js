@@ -13,6 +13,14 @@ export function getBooks() {
 
 export function requestDeleteBook(idBook) {
     return fetch(`${apiKey}/${idBook}.json`,
-    { method: 'DELETE'})
-    .then((resp) => resp.json())
+        { method: 'DELETE' })
+        .then((resp) => resp.json());
+}
+
+export function requestEditBook(idBook, author, title) {
+    return fetch(`${apiKey}/${idBook}.json`, {
+        method: 'PUT',
+        body: JSON.stringify({ author: author, title: title })
+    })
+        .then((resp) => resp.json());
 }

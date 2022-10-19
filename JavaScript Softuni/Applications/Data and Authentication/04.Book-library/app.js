@@ -1,4 +1,4 @@
-import { createBook, getBooks, requestDeleteBook } from "./firebase-request.js";
+import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./firebase-request.js";
 
 (() => {
 
@@ -14,20 +14,37 @@ import { createBook, getBooks, requestDeleteBook } from "./firebase-request.js";
         return tagEl;
     }
 
-    function deleteBook(idBook) {
+    function deleteBook(event) {
+        const idBook = event.target.dataset.idbook;
         requestDeleteBook(idBook);
-        loadListEl();
+        let currentBook = event.target.parentElement.parentElement;
+        currentBook.remove();
+
     }
 
     function editBook(event) {
+        const btnForm = formEl.querySelector('button');
+        const currentIdBook = event.target.dataset.idbook;
+        btnForm.setAttribute('data-idbook', currentIdBook);
+
+        const h3 = formEl.querySelector('h3');
+        const buttonForm = formEl.querySelector('button');
+        h3.textContent = 'Edit FORM';
+        buttonForm.textContent = 'Save';
 
     }
 
     function loadListEl() {
         const tbodyEl = document.querySelector('tbody');
         tbodyEl.innerHTML = '';
+        const h3 = formEl.querySelector('h3');
+        const buttonForm = formEl.querySelector('button');
+        h3.textContent = 'FORM';
+        buttonForm.textContent = 'Submit';
+
         getBooks().then((dataBooks) => {
 
+            if (dataBooks !== null) {
                 Object.entries(dataBooks).forEach(book => {
 
                     const [idBook, { title, author }] = book;
@@ -46,33 +63,40 @@ import { createBook, getBooks, requestDeleteBook } from "./firebase-request.js";
                     tdButtons.appendChild(btnDelete);
                     trEl.appendChild(tdButtons);
 
-                    // let bookHtmlEl = `
-                    // // <tr>
-                    // //   <td>${author}</td>
-                    // //   <td>${title}</td>
-                    // //   <td>
-                    // //      <button data-idBook = '${idBook}'>Edit</button>
-                    // //      <button data-idBook = '${idBook}'>Delete</button>
-                    // //   </td>
-                    // // </tr>`;
-
-                    // booksHtmlEl.push(bookHtmlEl);
                     tbodyEl.appendChild(trEl);
                 });
-            
+            }
+
 
         });
     }
 
     btnLoadEl.addEventListener('click', loadListEl);
 
+
     formEl.addEventListener('submit', (event) => {
         event.preventDefault();
+        const nameButton = event.target.querySelector('button');
         const { title, author } = event.target.elements;
+        if (nameButton.textContent === 'Submit') {
 
-        if (title.value !== '' && author.value !== '') {
-            createBook(author.value, title.value);
+            if (title.value !== '' && author.value !== '') {
+                Promise.all([createBook(author.value, title.value), loadListEl()]);
+                title.value = '';
+                author.value = '';
+            }
+        } else if (nameButton.textContent === 'Save') {
+            if (title.value !== '' && author.value !== '') {
+                const idBook = nameButton.dataset.idbook;
+                Promise.all([requestEditBook(idBook, author.value, title.value), loadListEl()]);
+
+            }
+        } else {
+            throw new Error('Button name is not correct.')
         }
+
+
+
 
     });
 
