@@ -7,11 +7,8 @@ const tbodyEl = tableEl.querySelector('tbody');
 
 function loadListStudents() {
 
-    let methodReqest =
-    {
-        method: 'GET'
-    }
-    myFireBaseRequest('/students.json', methodReqest)
+
+    myFireBaseRequest('/students.json', 'GET')
         .then((students) => {
             if (students !== null) {
                 let listStudents = [];
@@ -44,17 +41,15 @@ function addStudent(event) {
            <td>${facultyNumber.value}</td>
            <td>${grade}</td>
         </tr>`;
-        let methodReqest =
-        {
-            method: 'POST',
-            body: JSON.stringify({
-                firstName: firstName.value,
-                lastName: lastName.value,
-                facultyNumber: facultyNumber.value,
-                grade: grade.value
-            })
-        }
-        myFireBaseRequest('/students.json', methodReqest).then((resp) => {
+
+        let body = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            facultyNumber: facultyNumber.value,
+            grade: grade.value
+        };
+
+        myFireBaseRequest('/students.json', 'POST', body).then((resp) => {
             loadListStudents();
         });
         firstName.value = '';
@@ -62,7 +57,8 @@ function addStudent(event) {
         facultyNumber.value = '';
         grade.value = '';
     }
-
 }
+
+
 
 submit.addEventListener('click', addStudent);
