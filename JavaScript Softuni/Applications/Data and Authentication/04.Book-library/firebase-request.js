@@ -22,5 +22,5 @@ export function requestEditBook(idBook, author, title) {
         method: 'PUT',
         body: JSON.stringify({ author: author, title: title })
     })
-        .then((resp) => resp.json());
+        .then((resp) => {resp.json()});
 }

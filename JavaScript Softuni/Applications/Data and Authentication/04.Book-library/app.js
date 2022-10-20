@@ -46,7 +46,7 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
         const buttonForm = formEl.querySelector('button');
         h3.textContent = 'FORM';
         buttonForm.textContent = 'Submit';
-        const {author, title} = formEl.elements;
+        const { author, title } = formEl.elements;
         author.value = '';
         title.value = '';
 
@@ -78,6 +78,7 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
 
 
         });
+
     }
 
     btnLoadEl.addEventListener('click', loadListEl);
@@ -91,13 +92,20 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
 
             if (title.value !== '' && author.value !== '') {
                 createBook(title.value, author.value);
+                setTimeout(() => {
+                    loadListEl();
+                }, 1000);
                 title.value = '';
                 author.value = '';
             }
         } else if (nameButton.textContent === 'Save') {
             if (title.value !== '' && author.value !== '') {
-                const idBook = nameButton.dataset.idbook;
+                const idBook = nameButton.dataset.idbook
                 requestEditBook(idBook, author.value, title.value);
+                setTimeout(() => {
+                    loadListEl();
+                }, 1000);
+
                 author.value = '';
                 title.value = '';
             }
@@ -105,8 +113,6 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
             throw new Error('Button name is not correct.')
         }
 
-
-        loadListEl();
 
     });
 
