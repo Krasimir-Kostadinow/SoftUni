@@ -6,8 +6,8 @@ export function myFireBaseRequest(id, method, body) {
     {
         method: method,
         body: JSON.stringify(body)
-    }
-        return fetch(`${baseUrl}${id}`, reqest)
-            .then((resp) => resp.json())
-            .catch((err) => console.log(err.message));
-}
+    };
+    return fetch(`${baseUrl}${id}`, reqest)
+        .then((resp) => resp.json())
+        .catch((err) => console.log(err.message));
+};
