@@ -16,10 +16,23 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
     }
 
     function deleteBook(event) {
+        const btnForm = formEl.querySelector('button');
+        const currentIdBook = event.target.dataset.idbook;
+        btnForm.setAttribute('data-idbook', currentIdBook);
+        const editCurrentBookEl = event.target.parentElement.parentElement;
+        const [editTitle, editAuthor] = editCurrentBookEl.querySelectorAll('td');
+        const { title, author } = formEl.elements;
+        title.value = editTitle.textContent;
+        author.value = editAuthor.textContent;
+        author.disabled = true;
+        title.disabled = true;
+        const h3 = formEl.querySelector('h3');
+        const buttonForm = formEl.querySelector('button');
+        h3.textContent = 'Delete FORM';
+        buttonForm.textContent = 'Delete';
+
         const idBook = event.target.dataset.idbook;
         requestDeleteBook(idBook);
-        let currentBook = event.target.parentElement.parentElement;
-        currentBook.remove();
 
     }
 
@@ -91,26 +104,62 @@ import { createBook, getBooks, requestDeleteBook, requestEditBook } from "./fire
         if (nameButton.textContent === 'Submit') {
 
             if (title.value !== '' && author.value !== '') {
-                createBook(title.value, author.value);
-                setTimeout(() => {
-                    loadListEl();
-                }, 1000);
+                createBook(title.value, author.value).then(loadListEl());
+
                 title.value = '';
                 author.value = '';
+            } else {
+                const errorContent = document.querySelector('#errorContent');
+                if (title.value === '') {
+                    errorContent.textContent += 'Title input is empty';
+                }
+                if (author.value === '') {
+                    errorContent.textContent += ' Author input is empty';
+                }
+                errorContent.style.display = 'block';
+
+                setTimeout(() => {
+                    errorContent.style.display = 'none';
+                    errorContent.textContent = '';
+                }, 5000);
+
             }
-        } else if (nameButton.textContent === 'Save') {
+        }
+        else if (nameButton.textContent === 'Save') {
             if (title.value !== '' && author.value !== '') {
                 const idBook = nameButton.dataset.idbook
-                requestEditBook(idBook, author.value, title.value);
-                setTimeout(() => {
-                    loadListEl();
-                }, 1000);
+                requestEditBook(idBook, author.value, title.value).then(() => loadListEl());
 
                 author.value = '';
                 title.value = '';
+            } else {
+                const errorContent = document.querySelector('#errorContent');
+                if (title.value === '') {
+                    errorContent.textContent += 'Title input is empty';
+                }
+                if (author.value === '') {
+                    errorContent.textContent += ' Author input is empty';
+                }
+                errorContent.style.display = 'block';
+
+                setTimeout(() => {
+                    errorContent.style.display = 'none';
+                    errorContent.textContent = '';
+                }, 5000);
+
+
             }
+
+        } else if (nameButton.textContent === 'Delete') {
+            const idBook = nameButton.dataset.idbook;
+            requestDeleteBook(idBook).then(() => loadListEl());
+            const { title, author } = formEl.elements;
+            author.disabled = false;
+            title.disabled = false;
+
+
         } else {
-            throw new Error('Button name is not correct.')
+            throw new Error('Button name is not correct.');
         }
 
 
