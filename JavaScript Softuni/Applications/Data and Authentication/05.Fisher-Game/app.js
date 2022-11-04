@@ -15,13 +15,36 @@ window.addEventListener('load', async () => {
     const formEl = document.querySelector('#addForm');
     const mainEl = document.querySelector('#main');
     const { angler, weight, species, location, bait, captureTime } = formEl.elements;
-    let inputs = [angler.value, weight.value, species.value, location.value, bait.value, captureTime.value];
-    let isEmpty = inputs.includes('');
+    const btnAdd = formEl.elements[7];
+    let inputs = [angler, weight, species, location, bait, captureTime];
+
+    function checkInput(params) {
+        inputs.forEach((input) => {
+            input.addEventListener('input', function (event) {
+                for (const input of inputs) {
+                    if (input.value === '') {
+                        btnAdd.disabled = true;
+                        break;
+                    } else {
+                        btnAdd.disabled = false;
+                    }
+                }
+            });
+        });
+
+    }
+
+    checkInput();
+
+
+
+
+
 
     const btnLoad = document.querySelector('.load');
     btnLoad.addEventListener('click', loadData);
 
-    async function loadData(event) {
+    async function loadData() {
         let dataFire = api.getData();
 
         let [data, catchHbs, catchesHbs] = [await dataFire, await (await fetch('./catch.hbs')).text(), await (await fetch('./catches.hbs')).text()];
@@ -33,13 +56,15 @@ window.addEventListener('load', async () => {
             acc.push(v);
             return acc;
         }, []);
-        console.log(newData);
-
 
         let resultHtml = template({ newData });
         mainEl.innerHTML = resultHtml;
 
     };
+
+    async function createNewCatch() {
+
+    }
 
 
 });
