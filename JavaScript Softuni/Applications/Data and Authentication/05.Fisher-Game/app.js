@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
     const btnAdd = formEl.elements[7];
     let inputs = [angler, weight, species, location, bait, captureTime];
 
-    function checkInput(params) {
+    function checkInput() {
         inputs.forEach((input) => {
             input.addEventListener('input', function (event) {
                 for (const input of inputs) {
@@ -42,6 +42,9 @@ window.addEventListener('load', async () => {
         let [data, catchHbs, catchesHbs] = [await dataFire, await (await fetch('./catch.hbs')).text(), await (await fetch('./catches.hbs')).text()];
         Handlebars.registerPartial('catch', catchHbs);
         let template = Handlebars.compile(catchesHbs);
+        if (data === null) {
+            return;
+        }
         let newData = Object.entries(data).reduce((acc, [k, v]) => {
             v._id = k;
             acc.push(v);
@@ -67,6 +70,33 @@ window.addEventListener('load', async () => {
         loadData();
     }
 
+    async function deleteFish(event) {
+        let id = event.target.dataset.id;
+        let result = await api.deleteData(id);
+        if (result === null) {
+            let divCatch = event.target.parentElement;
+            divCatch.remove();
+        }
+    }
+
+    async function editFish(event) {
+        let id = event.target.dataset.id;
+        let divCatch = event.target.parentElement;
+        let [angler, weight, species, location, bait, captureTime] = divCatch.querySelectorAll('input');
+
+        let newData = {
+            angler: angler.value,
+            weight: weight.value,
+            species: species.value,
+            location: location.value,
+            bait: bait.value,
+            captureTime: captureTime.value
+        }
+        await api.editData(id, newData);
+
+        loadData();
+    }
+
 
     btnLoad.addEventListener('click', loadData);
     btnAdd.addEventListener('click', createCatchFish);
@@ -78,12 +108,12 @@ window.addEventListener('load', async () => {
         if (event.target.tagName !== 'BUTTON') {
             return;
         } else {
-            console.log(event.target.className);
             if (event.target.className === 'delete') {
-                console.log('Here is delete');
+                deleteFish(event);
             }
             if (event.target.className === 'update') {
-                console.log('here is update');
+                editFish(event);
+
             }
 
         }

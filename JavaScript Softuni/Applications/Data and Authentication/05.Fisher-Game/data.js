@@ -23,7 +23,7 @@ export async function createData(newData) {
 }
 
 export async function deleteData(id) {
-    return await fetch(host(id), { method: 'DELETE' });
+    return await (await fetch(host(id), { method: 'DELETE' })).json();
 }
 
 export async function editData(id, newData) {
