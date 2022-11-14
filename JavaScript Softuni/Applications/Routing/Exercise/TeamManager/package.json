@@ -1,15 +1,18 @@
 {
-  "name": "teammaanager",
+  "name": "teammanager",
   "version": "1.0.0",
-  "description": "Exercise",
-  "main": "index",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Krasimir-Kostadinow/SoftUni/tree/main/JavaScript%20Softuni/Applications/Routing/Exercise/TeamManager"
-  },
+  "keywords": [],
   "author": "Krasimir Kostadinov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "handlebars": "^4.7.7",
+    "jquery": "^3.6.1",
+    "sammy": "^0.7.6"
+  }
 }
