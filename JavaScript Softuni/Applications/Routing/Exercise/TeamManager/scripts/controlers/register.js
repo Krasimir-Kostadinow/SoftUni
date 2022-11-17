@@ -1,4 +1,4 @@
-
+import { register } from "../data.js";
 export default async function () {
     this.partials = {
         footer: await this.load('./templates/common/footer.hbs'),
@@ -9,10 +9,31 @@ export default async function () {
 };
 
 export async function registerPost() {
-    console.log(this.params);
 
-    this.app.userData.loggedIn = true;
-    this.app.userData.username = this.params.username;
+    const { btnRegister } = this.target.elements;
+    btnRegister.disabled = true;
+    if (this.params.password !== this.params.repeatPassword) {
+        alert("Password don't match");
+        return;
+    }
+    try {
+        let result = await register(this.params.username, this.params.password);
 
-    this.redirect('#/home');
+        if (result.userStatus) {
+            btnRegister.disabled = false;
+        }
+
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw (error);
+        }
+
+        this.redirect('#/login');
+    } catch (error) {
+        btnRegister.disabled = false;
+        alert(error.message);
+        console.error(error.message);
+    }
+
 }

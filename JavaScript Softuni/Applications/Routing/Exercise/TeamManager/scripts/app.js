@@ -1,7 +1,7 @@
 import home from './controlers/home.js';
 import about from './controlers/about.js';
 import register, { registerPost } from './controlers/register.js';
-import login from './controlers/login.js';
+import login, { loginPost } from './controlers/login.js';
 import catalog from './controlers/catalog.js';
 import details from './controlers/details.js';
 import create from './controlers/create.js';
@@ -35,6 +35,8 @@ $(() => {
         this.get('#/edit/:idEdit', edit);
 
         this.post('#/register', (ctx) => { registerPost.call(ctx); });
+
+        this.post('#/login', (ctx) => { loginPost.call(ctx); });
 
     });
 
