@@ -15,7 +15,7 @@ export async function loginPost() {
     // btnLogin.disabled = true;
     try {
         let result = await login(this.params.username, this.params.password);
-        console.log(result);
+
         // if (result.userStatus) {
         //     btnLogin.disabled = false;
         // }
@@ -25,15 +25,19 @@ export async function loginPost() {
             Object.assign(error, result);
             throw (error);
         }
-   
+
         this.app.userData.loggedIn = true;
-        this.app.userData.username = this.params.username;
+        this.app.userData.username = result.username;
+
+        localStorage.setItem('userToken', result['user-token']);
+        localStorage.setItem('username', result.username);
+
 
         this.redirect('#/home');
     } catch (error) {
         // btnRegister.disabled = false;
         alert(error.message);
-        console.error(error.message);
+        console.error(error.message);  
     }
 
 

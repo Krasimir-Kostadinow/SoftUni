@@ -4,7 +4,7 @@ import register, { registerPost } from './controlers/register.js';
 import login, { loginPost } from './controlers/login.js';
 import catalog from './controlers/catalog.js';
 import details from './controlers/details.js';
-import create from './controlers/create.js';
+import create, { createPost } from './controlers/create.js';
 import edit from './controlers/edit.js';
 $(() => {
     const app = Sammy('#main', function (context) {
@@ -38,6 +38,7 @@ $(() => {
 
         this.post('#/login', (ctx) => { loginPost.call(ctx); });
 
+        this.post('#/create', (ctx) => { createPost.call(ctx); });
     });
 
 
