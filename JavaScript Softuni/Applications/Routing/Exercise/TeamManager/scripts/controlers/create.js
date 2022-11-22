@@ -27,8 +27,9 @@ export async function createPost() {
             Object.assign(error, result);
             throw (error);
         }
-
-        this.redirect(`#/catalog/${objectId}`);
+        this.app.userData.hasTeam = true;
+        this.app.userData.teamId = result.objectId;
+        this.redirect(`#/catalog/${result.objectId}`);
     } catch (error) {
         alert(error.message);
         console.error(error.message);

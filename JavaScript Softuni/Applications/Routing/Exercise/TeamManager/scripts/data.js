@@ -2,7 +2,7 @@
 const endpoint = {
     register: 'api/users/register',
     login: 'api/users/login',
-    teams: 'data/teams'
+    teams: 'api/data/teams'
 }
 
 function host(endpoint) {
@@ -39,11 +39,14 @@ export async function login(username, password) {
 }
 
 export async function createTeam(team) {
+    console.log('ehoo I`m here');
     const token = localStorage.getItem('userToken');
     if (!token) {
         throw new Error('User is not logged in.');
     }
-    return (await (fetch(host(endpoint.teams), {
+
+
+    const result = (await (fetch(host(endpoint.teams), {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -51,4 +54,12 @@ export async function createTeam(team) {
         },
         body: JSON.stringify(team)
     }))).json();
+   
+    if (result.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, result);
+        throw (error);
+    }
+    return result;
+  
 }
