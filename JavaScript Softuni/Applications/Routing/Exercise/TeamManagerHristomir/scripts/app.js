@@ -96,7 +96,50 @@ function checkForLogged(context) {
         const { email, uid } = JSON.parse(userInfo);
         context.email = email;
         context.loggedIn = true;
+        context.uid = uid;
+
     }
+
+}
+
+function checkForTeam(context, data) {
+
+    const userInfo = localStorage.getItem('userInfo');
+    const { email, uid } = JSON.parse(userInfo);
+
+    Object.entries(data).forEach(([objectId, team]) => {
+        team.objectId = objectId;
+        // if (team.email === email && team.uid === uid) {
+        //     context.isOnTeam = true;
+        // }
+
+
+    });
+
+}
+
+function checkAuthorAndMember(context, data) {
+
+    if (context.uid === data.uid) {
+        context.isAuthor = true;
+    }
+    if (!data.members) {
+        context.isOnTeam = false;
+        context.isAuthor = false;
+        return;
+    }
+    data.members.forEach((member) => {
+        if (member.email === context.email && member.uid === context.uid) {
+            context.isOnTeam = true;
+        }
+    });
+
+
+
+}
+
+function checkForJoinTeam() {
+
 }
 
 
@@ -161,13 +204,60 @@ const router = Sammy('#main', function (context) {
     });
     this.get('#/catalog', function (context) {
         checkForLogged(context);
-        this.loadPartials({
-            'header': './templates/common/header.hbs',
-            'footer': './templates/common/footer.hbs',
-            'team': './templates/catalog/team.hbs'
-        }).then(function () {
-            this.partial('./templates/catalog/teamCatalog.hbs');
-        });
+        fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team.json')
+            .then((res) => res.json())
+            .then((data) => {
+                if (data === null) {
+                    this.loadPartials({
+                        'header': './templates/common/header.hbs',
+                        'footer': './templates/common/footer.hbs',
+                        'team': './templates/catalog/team.hbs',
+                    }).then(function () {
+                        this.partial('./templates/catalog/teamCatalog.hbs');
+                    });
+                } else {
+
+                    Object.entries(data).forEach(([objectId, team]) => {
+                        team.objectId = objectId;
+                        checkAuthorAndMember(context, team);
+                    });
+                    context.teams = Object.values(data);
+
+                    console.log(context);
+                    this.loadPartials({
+                        'header': './templates/common/header.hbs',
+                        'footer': './templates/common/footer.hbs',
+                        'team': './templates/catalog/team.hbs',
+                    }).then(function () {
+                        this.partial('./templates/catalog/teamCatalog.hbs');
+                    });
+                }
+
+            });
+
+    });
+    this.get('#/catalog/:id', function (context) {
+        checkForLogged(context);
+        fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}.json`)
+            .then((res) => res.json())
+            .then((data) => {
+
+                context.members = data.members;
+                context.teamName = data.teamName;
+                context.comment = data.comment;
+                context.objectId = context.params.id;
+                checkAuthorAndMember(context, data);
+                console.log(context);
+                this.loadPartials({
+                    'header': './templates/common/header.hbs',
+                    'footer': './templates/common/footer.hbs',
+                    'teamMember': './templates/catalog/teamMember.hbs',
+                    'teamControls': './templates/catalog/teamControls.hbs'
+                }).then(function () {
+                    this.partial('./templates/catalog/details.hbs');
+                });
+                console.log(context);
+            });
 
     });
     this.get('#/create', function (context) {
@@ -179,6 +269,133 @@ const router = Sammy('#main', function (context) {
         }).then(function () {
             this.partial('./templates/create/createPage.hbs');
         });
+
+    });
+    this.get('#/join/:id', function (context) {
+        checkForLogged(context);
+        let isJoined = false;
+        let nameTeam = false;
+        fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team.json')
+            .then((res) => res.json())
+            .then((data) => {
+                let dataArr = Object.entries(data);
+                for (const [objectId, team] of dataArr) {
+                    console.log(team);
+                    let membersOfTeam = team.members;
+                    if (membersOfTeam !== false) {
+                        for (const member of membersOfTeam) {
+                            let { email, uid } = member;
+                            if (email === context.email && uid === context.uid) {
+                                isJoined = true;
+                                nameTeam = team.teamName;
+                            }
+                        }
+                    }
+
+                }
+
+
+                if (isJoined) {
+                    infoBoxEl.textContent = `You are already a member of team ${nameTeam}. To become a member of this team you must leave team ${nameTeam}.`;
+                    infoAndErrorBox();
+
+                } else {
+                    fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let userInfo = localStorage.getItem('userInfo');
+                            const { email, uid } = JSON.parse(userInfo);
+                            let newMembers;
+                            if (data.members === false) {
+                                newMembers = [];
+                            } else {
+                                newMembers = data.members;
+                            }
+
+                            newMembers.push({ email: email, uid: uid });
+
+                            fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`, {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ members: newMembers })
+                            })
+                                .then((res) => {
+                                    infoBoxEl.textContent = `You succeed joined in team ${data.teamName}.`;
+                                    infoAndErrorBox();
+                                })
+
+                        });
+                }
+
+            });
+
+
+        context.redirect('#/home');
+
+    });
+    this.get('#/leave/:id', function (context) {
+        console.log(context);
+        fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`)
+            .then((res) => res.json())
+            .then((data) => {
+                let newMembers = data.members.slice();
+                if (data.members.length > 0) {
+
+                    let userInfo = localStorage.getItem('userInfo');
+                    const { email, uid } = JSON.parse(userInfo);
+                    for (let i = 0; i < newMembers.length; i++) {
+                        let member = newMembers[i];
+                        const emailMember = member.email;
+                        const uidMember = member.uid;
+                        if (email === emailMember && uid === uidMember) {
+                            newMembers.splice(i, 1);
+
+                        }
+                    }
+                    if (newMembers.length <= 0) {
+                        newMembers = false;
+                    }
+                } else {
+                    infoBoxEl.textContent = `Not members in team ${data.teamName}.`;
+                    infoAndErrorBox();
+                }
+
+                fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ members: newMembers })
+                })
+                    .then((res) => {
+                        infoBoxEl.textContent = `You are succeed leave team. ${data.teamName}.`;
+                        infoAndErrorBox();
+                    })
+
+            });
+
+        context.redirect('#/home');
+    });
+    this.get('#/edit/:id', function (context) {
+        checkForLogged(context);
+        fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}.json`)
+        .then((res) => res.json())
+        .then((data) => {
+            context.name = data.teamName;
+            context.comment = data.comment;
+            this.loadPartials({
+                'header': './templates/common/header.hbs',
+                'footer': './templates/common/footer.hbs',
+                'editForm': './templates/edit/editForm.hbs'
+            }).then(function () {
+                this.partial('./templates/edit/editPage.hbs');
+            });
+            console.log(context);
+            console.log('I`m here');   
+        });
+
     });
     //POST
     this.post('#/register', function (context) {
@@ -236,17 +453,66 @@ const router = Sammy('#main', function (context) {
             });
 
     });
-    this.post('#/create', async function (context) {
-        fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'Application/json'
-            },
-            body: JSON.stringify({
-                name: 'Krasi',
-                age: 39
-            })
-        })
+    this.post('#/create', function (context) {
+        checkForLogged(context);
+        let userInfo = localStorage.getItem('userInfo');
+        const { email, uid } = JSON.parse(userInfo);
+        const { name, comment } = context.params;
+        if (!userInfo || !name) {
+            return;
+        }
+
+
+        let isJoined = false;
+        let nameTeam = false;
+        fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team.json')
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data !== null) {
+                    let dataArr = Object.entries(data);
+                    for (const [objectId, team] of dataArr) {
+                        console.log(team);
+                        let membersOfTeam = team.members;
+                        if (membersOfTeam !== false) {
+                            for (const member of membersOfTeam) {
+                                let { email, uid } = member;
+                                if (email === context.email && uid === context.uid) {
+                                    isJoined = true;
+                                    nameTeam = team.teamName;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                if (isJoined) {
+                    infoBoxEl.textContent = `You are already a member of a team ${nameTeam}. To create a team you have to leave the team you are a member of.`;
+                    infoAndErrorBox();
+
+                } else {
+                    fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team.json', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ teamName: name, comment: comment, uid: uid, email: email, members: [{ email: email, uid: uid }] })
+                    }).then((res) => {
+                        infoBoxEl.textContent = `You are create team it name ${name}.`
+                        infoAndErrorBox();
+                    }).catch((error) => {
+                        errorBoxEl.textContent = error.message;
+                        infoAndErrorBox();
+                    });
+                }
+
+
+
+            });
+
+        context.redirect('#/home');
+
     });
 
 
