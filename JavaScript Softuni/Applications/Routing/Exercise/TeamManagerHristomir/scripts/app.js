@@ -102,21 +102,17 @@ function checkForLogged(context) {
 
 }
 
-function checkForTeam(context, data) {
+// function checkForTeam(context, data) {
 
-    const userInfo = localStorage.getItem('userInfo');
-    const { email, uid } = JSON.parse(userInfo);
+//     const userInfo = localStorage.getItem('userInfo');
+//     const { email, uid } = JSON.parse(userInfo);
 
-    Object.entries(data).forEach(([objectId, team]) => {
-        team.objectId = objectId;
-        // if (team.email === email && team.uid === uid) {
-        //     context.isOnTeam = true;
-        // }
+//     Object.entries(data).forEach(([objectId, team]) => {
+//         team.objectId = objectId;
 
+//     });
 
-    });
-
-}
+// }
 
 function checkAuthorAndMember(context, data) {
 
@@ -135,10 +131,6 @@ function checkAuthorAndMember(context, data) {
     });
 
 
-
-}
-
-function checkForJoinTeam() {
 
 }
 
@@ -223,7 +215,6 @@ const router = Sammy('#main', function (context) {
                     });
                     context.teams = Object.values(data);
 
-                    console.log(context);
                     this.loadPartials({
                         'header': './templates/common/header.hbs',
                         'footer': './templates/common/footer.hbs',
@@ -247,7 +238,6 @@ const router = Sammy('#main', function (context) {
                 context.comment = data.comment;
                 context.objectId = context.params.id;
                 checkAuthorAndMember(context, data);
-                console.log(context);
                 this.loadPartials({
                     'header': './templates/common/header.hbs',
                     'footer': './templates/common/footer.hbs',
@@ -256,7 +246,6 @@ const router = Sammy('#main', function (context) {
                 }).then(function () {
                     this.partial('./templates/catalog/details.hbs');
                 });
-                console.log(context);
             });
 
     });
@@ -280,7 +269,6 @@ const router = Sammy('#main', function (context) {
             .then((data) => {
                 let dataArr = Object.entries(data);
                 for (const [objectId, team] of dataArr) {
-                    console.log(team);
                     let membersOfTeam = team.members;
                     if (membersOfTeam !== false) {
                         for (const member of membersOfTeam) {
@@ -336,7 +324,6 @@ const router = Sammy('#main', function (context) {
 
     });
     this.get('#/leave/:id', function (context) {
-        console.log(context);
         fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`)
             .then((res) => res.json())
             .then((data) => {
@@ -381,20 +368,20 @@ const router = Sammy('#main', function (context) {
     this.get('#/edit/:id', function (context) {
         checkForLogged(context);
         fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}.json`)
-        .then((res) => res.json())
-        .then((data) => {
-            context.name = data.teamName;
-            context.comment = data.comment;
-            this.loadPartials({
-                'header': './templates/common/header.hbs',
-                'footer': './templates/common/footer.hbs',
-                'editForm': './templates/edit/editForm.hbs'
-            }).then(function () {
-                this.partial('./templates/edit/editPage.hbs');
+            .then((res) => res.json())
+            .then((data) => {
+                context.objectId = context.params.id;
+                context.name = data.teamName;
+                context.comment = data.comment;
+                this.loadPartials({
+                    'header': './templates/common/header.hbs',
+                    'footer': './templates/common/footer.hbs',
+                    'editForm': './templates/edit/editForm.hbs'
+                }).then(function () {
+                    this.partial('./templates/edit/editPage.hbs');
+                });
+
             });
-            console.log(context);
-            console.log('I`m here');   
-        });
 
     });
     //POST
@@ -468,11 +455,9 @@ const router = Sammy('#main', function (context) {
         fetch('https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team.json')
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 if (data !== null) {
                     let dataArr = Object.entries(data);
                     for (const [objectId, team] of dataArr) {
-                        console.log(team);
                         let membersOfTeam = team.members;
                         if (membersOfTeam !== false) {
                             for (const member of membersOfTeam) {
@@ -513,6 +498,23 @@ const router = Sammy('#main', function (context) {
 
         context.redirect('#/home');
 
+    });
+    this.post('#/edit/:id', function (context) {
+        fetch(`https://team-manager-c0884-default-rtdb.europe-west1.firebasedatabase.app/team/${context.params.id}/.json`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                teamName: context.params.name,
+                comment: context.params.comment
+            })
+        })
+            .then((res) => {
+                infoBoxEl.textContent = `You edit team ${context.params.name}.`;
+                infoAndErrorBox();
+            });
+        this.redirect('#/home');
     });
 
 
