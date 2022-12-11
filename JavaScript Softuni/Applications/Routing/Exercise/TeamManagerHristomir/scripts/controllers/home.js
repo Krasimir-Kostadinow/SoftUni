@@ -1,5 +1,5 @@
 import { timerForLogout } from '../app.js';
-import { checkForLogged } from '../helper.js'; 
+import { checkForLogged } from '../helper.js';
 import { startSession } from '../app.js';
 export default function (context) {
 
@@ -10,7 +10,6 @@ export default function (context) {
     }).then(function () {
         this.partial('./templates/home/home.hbs');
     });
-
     timerForLogout(context);
 
 }
