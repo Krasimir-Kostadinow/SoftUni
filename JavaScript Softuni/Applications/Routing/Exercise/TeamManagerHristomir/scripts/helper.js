@@ -24,7 +24,7 @@ export function infoAndErrorBox() {
         }, 6000);
     }
 
-    if (contentErrorBox !== '') {
+    if (contentErrorBox !== '') {  
         errorBoxEl.style.display = 'block';
         setTimeout(() => {
             errorBoxEl.textContent = '';

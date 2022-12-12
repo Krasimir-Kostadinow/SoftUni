@@ -11,6 +11,7 @@ import join from "./controllers/join.js";
 import leave from "./controllers/leave.js";
 import { edit, editTeam } from "./controllers/edit.js";
 import { infoBoxEl, errorBoxEl } from "./helper.js";
+import { infoAndErrorBox } from "./helper.js";
 
 export let startSession = { timer: undefined };
 (function checkInputs() {
