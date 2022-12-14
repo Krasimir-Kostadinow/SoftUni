@@ -27,6 +27,7 @@ export function editTeam(context) {
     }).then((res) => {
         infoBoxEl.textContent = `You edit team ${context.params.name}.`;
         infoAndErrorBox();
+        this.redirect(`#/catalog/${context.params.id}`);
     });
-    this.redirect('#/home');
+
 }

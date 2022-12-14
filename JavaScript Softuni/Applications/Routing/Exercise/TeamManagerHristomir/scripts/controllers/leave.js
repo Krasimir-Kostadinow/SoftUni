@@ -29,8 +29,11 @@ export default function (context) {
             infoBoxEl.textContent = `You are succeed leave team. ${data.teamName}.`;
             infoAndErrorBox();
         })
+            .then((res) => {
+                context.redirect(`#/catalog/${context.params.id}`);
+            });
 
     });
 
-    context.redirect('#/home');
+
 }

@@ -53,6 +53,7 @@ export function createTeam(context) {
             dataRequest('POST', undefined, { teamName: name, comment: comment, uid: uid, email: email, members: [{ email: email, uid: uid }] }).then((res) => {
                 infoBoxEl.textContent = `You are create team it name ${name}.`
                 infoAndErrorBox();
+                context.redirect('#/catalog');
             }).catch((error) => {
                 errorBoxEl.textContent = error.message;
                 infoAndErrorBox();
@@ -63,6 +64,6 @@ export function createTeam(context) {
 
     });
 
-    context.redirect('#/home');
+
 
 }
