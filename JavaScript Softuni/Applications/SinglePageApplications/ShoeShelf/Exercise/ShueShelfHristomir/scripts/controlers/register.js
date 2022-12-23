@@ -1,4 +1,13 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { firebaseConfig } from "../data.js";
+import { checkForLogged } from "../helper.js";
+
+
+const app = initializeApp(firebaseConfig);
+
 function register(context) {
+    checkForLogged(context);
     this.loadPartials({
         'header': './templates/partials/header.hbs',
         'footer': './templates/partials/footer.hbs'
@@ -32,8 +41,21 @@ function postRegister(context) {
     if (!validation(email, password, rePassword)) {
         return;
     }
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            localStorage.setItem('userInfo', JSON.stringify({ email: user.email, uid: user.uid }));
+            console.log(user);
+            this.redirect('#/home');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
 
-console.log('I`m here');
 
 
 }
