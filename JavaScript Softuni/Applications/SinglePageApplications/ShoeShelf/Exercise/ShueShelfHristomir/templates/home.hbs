@@ -1,4 +1,28 @@
 {{> header}}
+{{#if logged}}
+<div class="shoes">
+    {{#each offers}}
+    <div class="shoe">
+        <img src="{{imageUrl}}">
+        <h3>{{nameProduct}}</h3>
+        <a href="#/details/{{id}}">Buy it for ${{price}}</a>
+    </div>
+    {{else}}
+    <h1>No shoes to display. Be the first to create a new offer...</h1>
+    {{/each}}
+    {{!-- <div class="shoe">
+        <img
+            src="https://www.shooos.bg/media/catalog/product/cache/20/image/9df78eab33525d08d6e5fb8d27136e95/a/d/adidas-falcon-cg6211.jpg">
+        <h3>Adidas Falcon</h3>
+        <a>Buy it for $132,00</a>
+    </div>
+    <div class="shoe">
+        <img src="https://i1.t4s.cz/products/3023295-602/under-armour-ua-w-hovr-phantom-se-trek-263676-3023295-603.jpg">
+        <h3>Under Armour HOVR</h3>
+        <a href="">Buy it for $149,99</a>
+    </div> --}}
+</div>
+{{else}}
 <div class="container">
     <div class="about-us">
         <div>
@@ -10,4 +34,5 @@
         </p>
     </div>
 </div>
+{{/if}}
 {{> footer}}

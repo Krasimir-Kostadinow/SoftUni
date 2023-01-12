@@ -11,7 +11,7 @@ export default function (context) {
         localStorage.removeItem('userInfo');
         infoBoxEl.textContent = 'You are sign-out on account.';
         infoAndErrorBox();
-        context.redirect('#/home');
+        context.redirect('#/login');
         // Sign-out successful.
     }).catch((error) => {
         // An error happened.

@@ -1,22 +1,25 @@
-        <h1>Edit Offer</h1>
-        <p class="message"></p>
-        <form>
-            <div>
-                <input type="text" placeholder="Name...">
-            </div>
-            <div>
-                <input type="text" placeholder="Price...">
-            </div>
-            <div>
-                <input type="text" placeholder="Image url...">
-            </div>
-            <div>
-                <textarea placeholder="Give us some description about this offer..."></textarea>
-            </div>
-            <div>
-                <input type="text" placeholder="Brand...">
-            </div>
-            <div>
-                <button>Edit</button>
-            </div>
-        </form>
+{{> header}}
+<h1>Edit Offer</h1>
+<p class="message"></p>
+<form action="#/edit/{{params.id}}" method="post">
+    <div>
+        <input type="text" placeholder="Name..." name="nameProduct" value="{{offers.nameProduct}}">
+    </div>
+    <div>
+        <input type="text" placeholder="Price..." name="price" value="{{offers.price}}">
+    </div>
+    <div>
+        <input type="text" placeholder="Image url..." name="imageUrl" value="{{offers.imageUrl}}">
+    </div>
+    <div>
+        <textarea placeholder="Give us some description about this offer..."
+            name="description">{{offers.description}}</textarea>
+    </div>
+    <div>
+        <input type="text" placeholder="Brand..." name="brand" value="{{offers.brand}}">
+    </div>
+    <div>
+        <button>Edit</button>
+    </div>
+</form>
+{{> footer}}

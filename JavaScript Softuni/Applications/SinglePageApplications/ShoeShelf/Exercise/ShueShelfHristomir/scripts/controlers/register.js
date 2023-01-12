@@ -46,9 +46,7 @@ function postRegister(context) {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            localStorage.setItem('userInfo', JSON.stringify({ email: user.email, uid: user.uid }));
-            console.log(user);
-            this.redirect('#/home');
+            this.redirect('#/login');
         })
         .catch((error) => {
             const errorCode = error.code;
