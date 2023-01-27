@@ -1,15 +1,19 @@
 
-function host(url) {
+function host(url, type) {
     const apiKey = 'AIzaSyAClDSbq3bjaJZmbGgsk_Xmw-fu9cinEB8';
-    return `${url}${apiKey}`;
+    const baseUrl = 'https://movies-d7fb7-default-rtdb.europe-west1.firebasedatabase.app/';
+    if (type === 'auth') {
+        return `${url}${apiKey}`;
+    } else if (type === 'data') {
+        return `${baseUrl}${url}.json`;
+    }
+
+
 }
 
-function request(url, methods, body) {
-    if (methods === 'GET' || methods === 'DELETE') {
-        return fetch(host(url))
-            .then((res) => res.json());
-    }
-    return fetch(host(url), {
+function request(type, url, methods, body) {
+
+    return fetch(host(url, type), {
         method: methods,
         headers: {
             'Content-Type': 'application/json'
@@ -18,4 +22,4 @@ function request(url, methods, body) {
     })
         .then((res) => res.json());
 
-}
+};
