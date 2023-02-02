@@ -1,0 +1,3 @@
+function host(endpoint) {
+    return ``;
+}
