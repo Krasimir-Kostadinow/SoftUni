@@ -158,4 +158,4 @@ async function searchMovie(searchName) {
     })).json();
 };
 
-
+export { loginUser, registerUser, addMovie, deleteMovie, searchMovie, likedMovie, editMovie, getAllMovies, logoutUser };
