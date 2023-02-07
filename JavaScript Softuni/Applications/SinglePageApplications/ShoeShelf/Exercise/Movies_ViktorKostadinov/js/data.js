@@ -1,6 +1,6 @@
 
 function host(endpoint) {
-    return `https://eu-api.backendless.com/47F5905A-C0DA-0082-FF05-56049C6BE300/CEE1C7C3-E645-4461-BBFA-BC828DFB7EDC${endpoint}`;
+    return `https://api.backendless.com/FB38D3C0-7528-71E2-FFF2-13A51197F200/77301AAB-E9D5-49B2-90D0-C067C8118AA3${endpoint}`;
 };
 
 
@@ -147,8 +147,15 @@ async function likedMovie(objectId) {
 
 };
 
-async function searchMovie() {
-    // ????
-}
+async function searchMovie(searchName) {
+    const { userToken } = JSON.parse(localStorage.getItem('userInfo'));
+
+    return await (await fetch(host(endpoints['get-movies'] + `?where=title%20%3D%20%27${searchName}%27`), {
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': userToken
+        }
+    })).json();
+};
 
 
