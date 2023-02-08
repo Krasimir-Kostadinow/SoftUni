@@ -1,5 +1,5 @@
 import home from './controlers/home.js';
-import login from './controlers/login.js';
+import login, { postLogin } from './controlers/login.js';
 import register, { postRegister } from './controlers/register.js';
 import create from './controlers/create.js';
 import details from './controlers/details.js';
@@ -23,7 +23,10 @@ window.addEventListener('load', function (e) {
         this.post('#/register', context => {
             postRegister.call(context);
         });
-        // this.post('#/login', postLogin);
+        this.post('#/login', context => {
+            postLogin.call(context);
+        });
+
         // this.post('#/create', postCreate);
         // this.post('#/edit/:id', postEdit);
 

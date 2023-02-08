@@ -1,5 +1,6 @@
 
 import notificationBox from '../helper.js'
+import { registerUser } from '../data.js';
 export default async function register(context) {
 
     this.partials = {
@@ -16,14 +17,14 @@ export default async function register(context) {
 export async function postRegister(context) {
     const errorBoxEl = document.getElementById('errorBox');
     const successBoxEl = document.getElementById('successBox');
-    const { email, password, repeatPassword } = this.params;
+    const { username, password, repeatPassword } = this.params;
 
-    function validation(email, password, rePassword) {
+    function validation(username, password, rePassword) {
         let isValid = true;
         let content = '';
-        if (email.length <= 0) {
+        if (username.length <= 0) {
             isValid = false;
-            content = 'The email field must be filled.';
+            content = 'The Username field must be filled.';
             return { isValid, content };
         }
         if (password.length < 6) {
@@ -41,12 +42,26 @@ export async function postRegister(context) {
 
     }
 
-    const { isValid, content } = validation(email, password, repeatPassword);
-    console.log(isValid, content);
+    const { isValid, content } = validation(username, password, repeatPassword);
+
     if (!isValid) {
         notificationBox(content, errorBoxEl);
         return;
     }
 
-    console.log('Request Data');
+    try {
+        let result = await registerUser(username, password);
+  
+        if (result.hasOwnProperty('errorData')) {
+            throw new Error(result.message);
+        }
+        notificationBox('Successful registration!', successBoxEl);
+        this.redirect('#/login');
+
+    } catch (error) {
+        notificationBox(error.message, errorBoxEl);
+    }
+
+
+
 }

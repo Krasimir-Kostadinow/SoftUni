@@ -5,5 +5,6 @@ export default function notificationBox(content, typeBoxEl) {
     setTimeout(() => {
         typeBoxEl.textContent = '';
         boxView.style.display = 'none';
+        return true;
     }, 4000)
 };
