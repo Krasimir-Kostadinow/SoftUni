@@ -1,8 +1,10 @@
 {{> header}}
+{{> notifications}}
 {{#if isLogged}}
 <h3>You are made register.</h3>
 {{else}}
-<form class="text-center border border-light p-5" onSubmit='registerUser(event)'>
+
+<form class="text-center border border-light p-5" action="#/register" method="post">
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" placeholder="Email" name="email" value="">
@@ -20,3 +22,4 @@
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
 {{/if}}
+{{> footer}}

@@ -1,61 +1,52 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
-import { firebaseConfig } from "../data.js";
-import { checkForLogged } from "../helper.js";
 
+import notificationBox from '../helper.js'
+export default async function register(context) {
 
-const app = initializeApp(firebaseConfig);
+    this.partials = {
+        'header': await this.load('./templates/header.hbs'),
+        'notifications': await this.load('./templates/notifications.hbs'),
+        'footer': await this.load('./templates/footer.hbs')
+    }
 
-function register(context) {
-    checkForLogged(context);
-    this.loadPartials({
-        'header': './templates/partials/header.hbs',
-        'footer': './templates/partials/footer.hbs'
-    }).then(function () {
-        this.partial('./templates/register.hbs');
-    })
+    this.partial('./templates/register.hbs')
 };
 
-function validation(email, password, rePassword) {
-    let isValid = true;
-    if (email.length <= 0) {
-        isValid = false;
-        return isValid;
+
+
+export async function postRegister(context) {
+    const errorBoxEl = document.getElementById('errorBox');
+    const successBoxEl = document.getElementById('successBox');
+    const { email, password, repeatPassword } = this.params;
+
+    function validation(email, password, rePassword) {
+        let isValid = true;
+        let content = '';
+        if (email.length <= 0) {
+            isValid = false;
+            content = 'The email field must be filled.';
+            return { isValid, content };
+        }
+        if (password.length < 6) {
+            isValid = false;
+            content = 'Password must be longer than 6 characters.';
+            return { isValid, content };
+        }
+        if (password !== rePassword) {
+            isValid = false;
+            content = 'Password and repeat Password not match.';
+            return { isValid, content };
+        }
+
+        return { isValid, content };
+
     }
-    if (password.length < 6) {
-        isValid = false;
-        return isValid;
-    }
-    if (password !== rePassword) {
-        isValid = false;
-        return isValid;
-    }
 
-    return isValid;
-
-}
-
-function postRegister(context) {
-
-    const { email, password, rePassword } = context.params;
-    if (!validation(email, password, rePassword)) {
+    const { isValid, content } = validation(email, password, repeatPassword);
+    console.log(isValid, content);
+    if (!isValid) {
+        notificationBox(content, errorBoxEl);
         return;
     }
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            this.redirect('#/login');
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-        });
 
-
-
+    console.log('Request Data');
 }
-
-export { register, postRegister }

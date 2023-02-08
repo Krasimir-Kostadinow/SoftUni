@@ -1,29 +1,28 @@
-import { home } from './controlers/home.js';
-// import { register, postRegister } from './controlers/register.js';
-// import { login, postLogin } from './controlers/login.js';
-// import { logout } from './controlers/logout.js';
-// import { create, postCreate } from './controlers/create.js';
-// import { details, deleteOffer } from './controlers/details.js';
-// import { edit, postEdit } from './controlers/edit.js';
-// import { deal } from './controlers/deal.js';
+import home from './controlers/home.js';
+import login from './controlers/login.js';
+import register, { postRegister } from './controlers/register.js';
+import create from './controlers/create.js';
+import details from './controlers/details.js';
+import edit from './controlers/edit.js';
+
 window.addEventListener('load', function (e) {
     const router = Sammy('#container', function (context) {
         this.use('Handlebars', 'hbs');
-        console.log(context);
-        console.log(this);
 
         //GET
         this.get('#/home', home);
-        // this.get('#/register', register);
-        // this.get('#/login', login);
+        this.get('#/register', register);
+        this.get('#/login', login);
         // this.get('#/logout', logout);
-        // this.get('#/create-offer', create);
-        // this.get('#/details/:id', details);
+        this.get('#/create', create);
+        this.get('#/details/:id', details);
         // this.get('#/delete/:id', deleteOffer);
-        // this.get('#/edit/:id', edit);
-        // this.get('#/buy/:id', deal);
+        this.get('#/edit/:id', edit);
+
         //POST
-        // this.post('#/register', postRegister);
+        this.post('#/register', context => {
+            postRegister.call(context);
+        });
         // this.post('#/login', postLogin);
         // this.post('#/create', postCreate);
         // this.post('#/edit/:id', postEdit);
