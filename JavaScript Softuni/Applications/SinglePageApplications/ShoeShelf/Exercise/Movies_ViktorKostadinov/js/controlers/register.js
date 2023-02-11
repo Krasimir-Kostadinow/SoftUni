@@ -51,7 +51,7 @@ export async function postRegister(context) {
 
     try {
         let result = await registerUser(username, password);
-  
+        console.log(context);
         if (result.hasOwnProperty('errorData')) {
             throw new Error(result.message);
         }

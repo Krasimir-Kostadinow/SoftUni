@@ -5,8 +5,9 @@ import create from './controlers/create.js';
 import details from './controlers/details.js';
 import edit from './controlers/edit.js';
 
-window.addEventListener('load', function (e) {
+window.addEventListener('load', function () {
     const router = Sammy('#container', function (context) {
+   
         this.use('Handlebars', 'hbs');
 
         //GET
@@ -23,7 +24,7 @@ window.addEventListener('load', function (e) {
         this.post('#/register', context => {
             postRegister.call(context);
         });
-        this.post('#/login', context => {
+        this.post('#/login', function (context) {
             postLogin.call(context);
         });
 

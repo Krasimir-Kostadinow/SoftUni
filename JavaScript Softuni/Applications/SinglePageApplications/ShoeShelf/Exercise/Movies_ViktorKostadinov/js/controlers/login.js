@@ -12,6 +12,7 @@ export default async function login(context) {
 };
 
 export async function postLogin(context) {
+
     const errorBoxEl = document.getElementById('errorBox');
     const successBoxEl = document.getElementById('successBox');
     const { username, password } = this.params;
@@ -44,16 +45,13 @@ export async function postLogin(context) {
 
     try {
         let result = await loginUser(username, password);
-        console.log(result);
+        console.log(context);
         if (result.hasOwnProperty('errorData')) {
             throw new Error(result.message);
         }
         notificationBox('Login successful.', successBoxEl);
-     
+
     } catch (error) {
         notificationBox(error.message, errorBoxEl);
     }
-
-
-
 };
