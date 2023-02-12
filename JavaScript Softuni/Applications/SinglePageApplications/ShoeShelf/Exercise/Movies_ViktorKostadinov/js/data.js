@@ -44,12 +44,13 @@ async function loginUser(username, password) {
 
 async function logoutUser() {
     const { userToken } = JSON.parse(localStorage.getItem('userInfo'));
-    await fetch(host(endpoints['logout']), {
+  let result = await fetch(host(endpoints['logout']), {
         headers: {
             'user-token': userToken
         }
     });
     localStorage.removeItem('userInfo');
+    return result;
 };
 
 async function getAllMovies() {

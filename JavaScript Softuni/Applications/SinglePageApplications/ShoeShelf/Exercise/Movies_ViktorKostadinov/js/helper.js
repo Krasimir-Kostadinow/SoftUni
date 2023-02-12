@@ -1,10 +1,20 @@
 export default function notificationBox(content, typeBoxEl) {
+    const nameAttribute = typeBoxEl.getAttribute('id');
     typeBoxEl.textContent = content;
     const boxView = typeBoxEl.parentElement;
     boxView.style.display = 'block';
-    setTimeout(() => {
-        typeBoxEl.textContent = '';
-        boxView.style.display = 'none';
-        return true;
-    }, 4000)
+
+    if (nameAttribute === 'errorBox') {
+        boxView.addEventListener('click', () => {
+            typeBoxEl.textContent = '';
+            boxView.style.display = 'none';
+        });
+    } else {
+        setTimeout(() => {
+            typeBoxEl.textContent = '';
+            boxView.style.display = 'none';
+        }, 3000)
+    }
+
+
 };

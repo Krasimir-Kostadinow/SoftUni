@@ -16,7 +16,7 @@ export async function postLogin(context) {
     const errorBoxEl = document.getElementById('errorBox');
     const successBoxEl = document.getElementById('successBox');
     const { username, password } = this.params;
-    console.log(username, password);
+
 
     function validation(username, password) {
         let isValid = true;
@@ -45,11 +45,18 @@ export async function postLogin(context) {
 
     try {
         let result = await loginUser(username, password);
-        console.log(context);
+
         if (result.hasOwnProperty('errorData')) {
             throw new Error(result.message);
         }
+
         notificationBox('Login successful.', successBoxEl);
+        setTimeout(() => {
+            this.redirect('#/home');
+        }, 3000);
+
+
+
 
     } catch (error) {
         notificationBox(error.message, errorBoxEl);
