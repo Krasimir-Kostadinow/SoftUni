@@ -6,6 +6,7 @@ import details from './controlers/details.js';
 import edit from './controlers/edit.js';
 import logout from './controlers/logout.js';
 
+
 window.addEventListener('load', function () {
 
     const router = Sammy('#container', function (context) {

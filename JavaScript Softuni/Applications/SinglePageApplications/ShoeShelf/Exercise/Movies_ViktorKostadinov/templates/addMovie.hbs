@@ -1,6 +1,7 @@
 {{> header}}
-{{!-- {{#if isLogged}} --}}
-<form class="text-center border border-light p-5">
+{{> notifications}}
+{{#if userInfo.isLogged}}
+<form class="text-center border border-light p-5" action="#/create" method="post">
     <h1>Add Movie</h1>
     <div class="form-group">
         <label for="title">Movie Title</label>
@@ -16,5 +17,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-{{!-- {{/if}} --}}
+{{/if}}
 {{> footer}}
