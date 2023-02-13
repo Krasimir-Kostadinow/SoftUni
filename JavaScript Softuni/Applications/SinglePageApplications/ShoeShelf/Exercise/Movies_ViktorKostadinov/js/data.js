@@ -37,14 +37,14 @@ async function loginUser(username, password) {
         })
     })).json();
 
-    localStorage.setItem('userInfo', JSON.stringify({ userToken: result['user-token'], userName: result.username }));
+    localStorage.setItem('userInfo', JSON.stringify({ userToken: result['user-token'], userName: result.username, uid: result.ownerId }));
 
     return result;
 };
 
 async function logoutUser() {
     const { userToken } = JSON.parse(localStorage.getItem('userInfo'));
-  let result = await fetch(host(endpoints['logout']), {
+    let result = await fetch(host(endpoints['logout']), {
         headers: {
             'user-token': userToken
         }
@@ -159,4 +159,4 @@ async function searchMovie(searchName) {
     })).json();
 };
 
-export { loginUser, registerUser, addMovie, deleteMovie, searchMovie, likedMovie, editMovie, getAllMovies, logoutUser };
+export { loginUser, registerUser, addMovie, deleteMovie, searchMovie, likedMovie, editMovie, getAllMovies, logoutUser, getMovie };

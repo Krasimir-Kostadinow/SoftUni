@@ -1,10 +1,12 @@
 import home from './controlers/home.js';
 import login, { postLogin } from './controlers/login.js';
 import register, { postRegister } from './controlers/register.js';
-import create from './controlers/create.js';
+import create, { postCreate } from './controlers/create.js';
 import details from './controlers/details.js';
-import edit from './controlers/edit.js';
+import edit, { postEdit } from './controlers/edit.js';
 import logout from './controlers/logout.js';
+import delMovie from './controlers/deleteMovie.js';
+
 
 
 window.addEventListener('load', function () {
@@ -20,7 +22,7 @@ window.addEventListener('load', function () {
         this.get('#/logout', logout);
         this.get('#/create', create);
         this.get('#/details/:id', details);
-        // this.get('#/delete/:id', deleteOffer);
+        this.get('#/delete/:id', delMovie);
         this.get('#/edit/:id', edit);
 
         //POST
@@ -31,8 +33,12 @@ window.addEventListener('load', function () {
             postLogin.call(context);
         });
 
-        // this.post('#/create', postCreate);
-        // this.post('#/edit/:id', postEdit);
+        this.post('#/create', context => {
+            postCreate.call(context);
+        });
+        this.post('#/edit/:id', context => {
+            postEdit.call(context);
+        });
 
 
 

@@ -4,11 +4,11 @@ export default async function home(context) {
     if (userInfo) {
         context.userInfo = { isLogged: true, username: userInfo.userName };
         const movies = await getAllMovies();
-        console.log(movies);
         if (movies !== []) {
             context.movies = movies;
         }
     }
+
    
     this.partials = {
         'header': await this.load('./templates/header.hbs'),
