@@ -127,7 +127,7 @@ async function likedMovie(objectId) {
     let newLiked = [];
 
     const { likeds } = await getMovie(objectId);
-    console.log(likeds);
+
     if (likeds === null) {
         newLiked.push(userName);
     } else {
