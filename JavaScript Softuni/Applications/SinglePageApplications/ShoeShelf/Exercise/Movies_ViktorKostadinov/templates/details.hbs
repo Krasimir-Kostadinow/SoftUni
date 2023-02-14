@@ -14,12 +14,12 @@
             {{#if movie.isCreator}}
             <a class="btn btn-danger" href="#/delete/{{movie.objectId}}">Delete</a>
             <a class="btn btn-warning" href="#/edit/{{movie.objectId}}">Edit</a>
-            <span class="enrolled-span">Liked {{movie.likeds}}</span>
+            <span class="enrolled-span">Liked {{movie.likeds.length}}</span>
             {{else}}
             {{#if movie.isLiked}}
-            <span class="enrolled-span">Liked {{movie.likeds}}</span>
+            <span class="enrolled-span">Liked {{movie.likeds.length}}</span>
             {{else}}
-            <a class="btn btn-primary" href='#/like'>Like</a>
+            <a class="btn btn-primary" href='#/like/{{movie.objectId}}'>Like</a>
             {{/if}}
 
             {{/if}}

@@ -100,7 +100,7 @@ async function addMovie(title, description, imageUrl) {
             'user-token': userToken
         },
         body: JSON.stringify({
-            title, description, imageUrl
+            title, description, imageUrl, likeds: null
         })
     })).json();
 }

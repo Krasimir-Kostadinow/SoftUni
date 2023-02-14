@@ -8,11 +8,19 @@ export default async function details(context) {
         try {
             let objectId = context.params.id;
             let result = await getMovie(objectId);
-        
+
             if (result.errorData) {
                 throw new Error(result.message);
             }
+   
             context.movie = result;
+            if (result.likeds !== null && result.likeds.includes(userInfo.userName)) {
+                context.movie.isLiked = true;
+            } else {
+                context.movie.isLiked = false;
+            }
+
+
             if (context.movie.ownerId === userInfo.uid) {
                 context.movie.isCreator = true;
             } else {

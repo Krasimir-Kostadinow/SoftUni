@@ -6,6 +6,7 @@ import details from './controlers/details.js';
 import edit, { postEdit } from './controlers/edit.js';
 import logout from './controlers/logout.js';
 import delMovie from './controlers/deleteMovie.js';
+import likeMovie from './controlers/like.js';
 
 
 
@@ -24,6 +25,7 @@ window.addEventListener('load', function () {
         this.get('#/details/:id', details);
         this.get('#/delete/:id', delMovie);
         this.get('#/edit/:id', edit);
+        this.get('#/like/:id', likeMovie);
 
         //POST
         this.post('#/register', context => {
@@ -39,6 +41,9 @@ window.addEventListener('load', function () {
         this.post('#/edit/:id', context => {
             postEdit.call(context);
         });
+        // this.post('#/like/:id', context => {
+        //     likeMovie.call(context);
+        // });
 
 
 
